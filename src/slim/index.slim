@@ -4,7 +4,10 @@ html
     title Slack Like Twitter Client
     link href="../../vender/semantic/dist/semantic.min.css" rel="stylesheet" type="text/css"
     link href="../css/layout.css" rel="stylesheet" type="text/css"
-    script src="../../vender/underscore/underscore.js"
+    script src="../js/twitter_client.js"
+    script src="../components/timeline.js"
+    script src="../components/tweet_box.js"
+
 
   body
     .container
@@ -41,7 +44,4 @@ html
                 .screen-name 9m
               .text
                 | tesst
-        #tweet-form.tweet-form.ui.form
-          textarea rows=3
-          .tweet-panel
-            button.ui.mini.twitter.button POST
+        #tweet-box.tweet-form.ui.form

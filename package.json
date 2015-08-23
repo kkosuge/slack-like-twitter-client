@@ -25,5 +25,8 @@
     "gulp-less": "^3.0.3",
     "gulp-plumber": "^1.0.1",
     "gulp-slim": "^0.3.0"
+  },
+  "dependencies": {
+    "twitter": "^1.2.5"
   }
 }
