@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title Slack Like Twitter Client
+    link href="../../vender/semantic/dist/semantic.min.css" rel="stylesheet" type="text/css"
+    link href="../css/layout.css" rel="stylesheet" type="text/css"
+    script src="../../vender/underscore/underscore.js"
+
+  body
+    .container
+      .side-menu
+        .user
+          .profile-image
+            img src="https://secure.gravatar.com/avatar/c2a5bf85aefd1355e5009ede999a1bce.jpg"
+          .screen-name @9m
+        h3 channels
+        nav.channel-list
+          ul
+            li.active: a home timeline
+        h3 lists
+        nav.channel-list
+          ul
+            li
+              span.prefix #
+              a main
+            li
+              span.prefix #
+              a test
+            li
+              span.prefix #
+              a feed
+
+      .main-article
+        #tweets.tweets
+          .tweet
+            .profile-image
+              img src="https://secure.gravatar.com/avatar/c2a5bf85aefd1355e5009ede999a1bce.jpg"
+            .contents
+              .name-contents
+                .name kkosuge
+                .screen-name 9m
+              .text
+                | tesst
+        #tweet-form.tweet-form.ui.form
+          textarea rows=3
+          .tweet-panel
+            button.ui.mini.twitter.button POST

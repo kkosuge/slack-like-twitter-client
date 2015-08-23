@@ -1,0 +1,29 @@
+{
+  "name": "slack-like-twitter-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kkosuge/slack-like-twitter-client.git"
+  },
+  "keywords": [],
+  "author": "kkosuge",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kkosuge/slack-like-twitter-client/issues"
+  },
+  "homepage": "https://github.com/kkosuge/slack-like-twitter-client",
+  "devDependencies": {
+    "del": "^1.2.1",
+    "gulp": "^3.9.0",
+    "gulp-cjsx": "^3.0.0",
+    "gulp-coffee": "^2.3.1",
+    "gulp-less": "^3.0.3",
+    "gulp-plumber": "^1.0.1",
+    "gulp-slim": "^0.3.0"
+  }
+}
