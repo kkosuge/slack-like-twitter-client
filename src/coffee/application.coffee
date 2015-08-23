@@ -31,7 +31,6 @@ class Application
         app.quit()
 
     app.on 'ready', =>
-      @openMainWindow()
       new AuthenticationWindow (credentials) =>
         console.log credentials
         global.twitter_credentials.access_token_key = credentials.accessToken

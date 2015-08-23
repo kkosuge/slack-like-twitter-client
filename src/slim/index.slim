@@ -5,6 +5,7 @@ html
     link href="../../vender/semantic/dist/semantic.min.css" rel="stylesheet" type="text/css"
     link href="../css/layout.css" rel="stylesheet" type="text/css"
     script src="../js/twitter_client.js"
+    script src="../components/profile.js"
     script src="../components/timeline.js"
     script src="../components/tweet_box.js"
 
@@ -12,10 +13,8 @@ html
   body
     .container
       .side-menu
-        .user
-          .profile-image
-            img src="https://secure.gravatar.com/avatar/c2a5bf85aefd1355e5009ede999a1bce.jpg"
-          .screen-name @9m
+        #profile
+
         h3 channels
         nav.channel-list
           ul

@@ -30,7 +30,7 @@ Tweet = React.createClass
 
 
 Tweets = React.createClass
-  getInitialState: () ->
+  getInitialState: ->
     tweets: []
 
   componentDidMount: ->
