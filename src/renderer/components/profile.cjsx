@@ -1,7 +1,7 @@
-$ = require 'jquery'
-_ = require 'underscore'
 React = require 'react'
+Twitter = require('remote').require('twitter')
 
+module.exports =
 Profile = React.createClass
   getInitialState: ->
     user: {}
@@ -24,6 +24,3 @@ Profile = React.createClass
         @{ this.state.user.screen_name }
       </div>
     </div>
-
-$ ->
-  React.render(<Profile />, document.getElementById('profile'))

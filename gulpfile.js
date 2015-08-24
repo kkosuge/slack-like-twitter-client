@@ -7,10 +7,10 @@ var plumber = require('gulp-plumber');
 var del = require('del');
 
 var paths = {
-  coffee: ['./src/coffee/**/*.coffee'],
-  slim: ['./src/slim/**/*.slim'],
-  less: ['./src/less/**/*.less'],
-  cjsx: ['./src/components/**/*.cjsx'],
+  coffee: ['./src/**/*.coffee'],
+  slim: ['./src/**/*.slim'],
+  less: ['./src/**/*.less'],
+  cjsx: ['./src/**/*.cjsx'],
 };
 
 gulp.task('clean', function(){});
@@ -19,14 +19,14 @@ gulp.task('coffee', ['clean'], function() {
   return gulp.src(paths.coffee)
     .pipe(plumber())
     .pipe(coffee())
-    .pipe(gulp.dest('build/js'));
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('main', ['clean'], function() {
   return gulp.src('./main.coffee')
     .pipe(plumber())
     .pipe(coffee({bare: true}))
-    .pipe(gulp.dest('./build'));
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('slim', ['clean'], function(){
@@ -35,7 +35,7 @@ gulp.task('slim', ['clean'], function(){
     .pipe(slim({
       pretty: true
     }))
-    .pipe(gulp.dest("./build/html/"));
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('less', ['clean'], function () {
@@ -43,14 +43,14 @@ gulp.task('less', ['clean'], function () {
     .pipe(plumber())
     .pipe(less({
     }))
-    .pipe(gulp.dest('./build/css'));
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('cjsx', ['clean'], function() {
   gulp.src(paths.cjsx)
     .pipe(plumber())
     .pipe(cjsx({ bare: true }))
-    .pipe(gulp.dest('./build/components/'));
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('watch', function() {

@@ -2,7 +2,7 @@ BrowserWindow = require 'browser-window'
 Twitter = require 'node-twitter-api'
 
 module.exports =
-class AuthenticationWindow
+class Authentication
   constructor: (callback) ->
     klass = @
     twitter = new Twitter

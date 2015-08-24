@@ -1,3 +1,3 @@
-Application = require './js/application.js'
+Application = require './browser/application'
 
-new Application
+global.application = new Application()

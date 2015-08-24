@@ -2,7 +2,8 @@ $ = require 'jquery'
 _ = require 'underscore'
 React = require 'react'
 
-TweetForm = React.createClass
+module.exports =
+TweetBox = React.createClass
   getInitialState: () ->
     text: ''
 
@@ -20,12 +21,9 @@ TweetForm = React.createClass
     @setState(text: e.target.value)
 
   render: ->
-    <div>
+    <div className="tweet-form ui form">
       <textarea rows="3" value={ this.state.text } onChange={ this.handleTextareaChange }></textarea>
       <div className="tweet-panel">
         <button className="ui mini twitter button" onClick={ this.handleButtonClick }>POST</button>
       </div>
     </div>
-
-$ ->
-  React.render(<TweetForm />, document.getElementById('tweet-box'))
