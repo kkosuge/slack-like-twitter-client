@@ -6,8 +6,6 @@ Timeline = require './timeline'
 global.twitter_credentials =
   consumer_key: 'b5vOZ3RqJMuOD3HAAuDWib6ZX',
   consumer_secret: '2HGGzCwXhxuuHfx56b4rBf5XWSWeRweLdAcVJKd6jCbObs5eiu',
-  access_token_key: '290386705-rBklhwCuaGmxaAgwmPcExdIREVgjmGxrtjoj2woZ',
-  access_token_secret: 'IDZYIfgcC8SX31ZURW07pP3LcCAQOFMh4Aq3Epga3aOUy'
 
 module.exports =
 class Application
@@ -28,7 +26,6 @@ class Application
 
   onReady: =>
     new Authentication (credentials) =>
-      console.log credentials
       global.twitter_credentials.access_token_key = credentials.accessToken
       global.twitter_credentials.access_token_secret = credentials.accessTokenSecret
       @openMainWindow()

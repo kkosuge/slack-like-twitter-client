@@ -33,6 +33,8 @@ Tweets = React.createClass
     tweets =  @state.tweets.map (tweet) ->
       <Tweet tweet={ tweet } />
 
-    <div className="tweets">
-      { tweets }
+    <div id="tweets">
+      <div className="tweets">
+        { tweets }
+      </div>
     </div>

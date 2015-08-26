@@ -5,30 +5,6 @@ html
     link href="../vender/semantic/dist/semantic.min.css" rel="stylesheet" type="text/css"
     link href="./renderer/stylesheets/layout.css" rel="stylesheet" type="text/css"
     javascript:
-      require("./renderer/components/application");
+      require("./renderer/components/root");
 
   body
-    .container
-      .side-menu
-        #profile
-
-        h3 channels
-        nav.channel-list
-          ul
-            li.active: a home timeline
-        h3 lists
-        nav.channel-list
-          ul
-            li
-              span.prefix #
-              a main
-            li
-              span.prefix #
-              a test
-            li
-              span.prefix #
-              a feed
-
-      .main-article
-        #tweets
-        #tweet-box
