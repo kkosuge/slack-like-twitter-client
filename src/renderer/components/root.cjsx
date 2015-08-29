@@ -8,14 +8,26 @@ Twitter = remote.require 'node-twitter-api'
 BrowserWindow = remote.require('browser-window')
 Authentication = require '../authentication'
 accountStore = require '../stores/account_store'
+timelineStore = require '../stores/timeline_store'
+TwitterClient = require '../twitter_client'
 
 Root = React.createClass
   getInitialState: ->
-    account: accountStore.getAccount().user
+    account: accountStore.getAccount()
+    tweets: []
+
+  componentWillMount: ->
+    accountStore.on 'changed', (account) =>
+      @setState(account: accountStore.getAccount().user)
+    timelineStore.on 'changed', (tweets) =>
+      @setState(tweets: timelineStore.getTweets())
 
   componentDidMount: ->
-    accountStore.on 'changed', (account) =>
-      @setState(account: account.user)
+    if accountStore.userExists()
+      document.getElementById('webview').remove()
+      client = new TwitterClient(@state.account.credentails)
+      client.fetchTimeline().then (tweets) =>
+        timelineStore.mergeTweets(tweets)
 
   render: ->
     unless accountStore.userExists()
@@ -24,10 +36,10 @@ Root = React.createClass
 
     <div className="container">
       <div className="side-menu">
-        <Profile user={ @state.account }/>
+        <Profile user={ @state.account.user }/>
       </div>
       <div className="main-article">
-        <Tweets />
+        <Tweets tweets={ @state.tweets } />
         <TweetBox />
       </div>
     </div>

@@ -1,5 +1,6 @@
 EventEmitter = require('events').EventEmitter
 StoneSkin = require 'stone-skin/with-tv4'
+TwitterClient = require '../twitter_client'
 
 class Account extends StoneSkin.IndexedDb
   storeName: 'Account'
@@ -29,20 +30,21 @@ class AccountStore extends EventEmitter
 
   userExists: => !!Object.keys(@account).length
 
-  updateUser: (user) =>
-    @model.user = user
-    localforage.setItem 'account', @model, => @emit('changed')
-    @emit('changed', @account)
-
   create: (user, credentails) =>
     @account = {
       _id: user.id_str
       user: user
       credentails: credentails
     }
-    @model.ready.then =>
-      @model.save @account
-      @emit('changed', @account)
+    @model.ready
+      .then =>
+        @model.save @account
+        @emit('changed', @account)
+      .then =>
+        client = new TwitterClient(credentails)
+        client.fetchTimeline().then (tweets) =>
+          timelineStore.mergeTweets(tweets)
+
 
 global.account_store ||= new AccountStore
 module.exports = global.account_store

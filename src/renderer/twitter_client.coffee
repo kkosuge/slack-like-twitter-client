@@ -11,6 +11,13 @@ class TwitterClient
     new Promise (resolve, reject) =>
       @client.get(
         'account/verify_credentials',
-        (error, account, response) =>
-          resolve(account)
+        (error, account, response) => resolve(account)
+      )
+
+  fetchTimeline: (screen_name) =>
+    return new Promise (resolve, reject) =>
+      @client.get(
+        'statuses/home_timeline',
+        { screen_name: screen_name },
+        (error, tweets, response) => resolve(tweets)
       )
