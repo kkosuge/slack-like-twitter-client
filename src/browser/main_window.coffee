@@ -1,11 +1,11 @@
 BrowserWindow = require 'browser-window'
 
 module.exports =
-class Timeline
+class MainWindow
   constructor: ->
     window = new BrowserWindow
-      width: 800,
-      height: 600
+      width: 990,
+      height: 700
     window.loadUrl("file://#{__dirname}/../index.html")
 
     window.on 'closed', =>

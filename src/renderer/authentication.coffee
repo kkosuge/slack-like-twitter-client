@@ -32,7 +32,6 @@ class Authentication
       @accessTokenSecret = accessTokenSecret
       @webview.remove()
       @updateAccount()
-      #location.reload()
 
   getRequestToken: =>
     @twitter.getRequestToken (error, requestToken, requestTokenSecret) =>

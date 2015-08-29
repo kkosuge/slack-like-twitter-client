@@ -1,7 +1,6 @@
 app = require 'app'
 BrowserWindow = require 'browser-window'
-Authentication = require './authentication'
-Timeline = require './timeline'
+MainWindow = require './main_window'
 
 global.twitter_credentials =
   consumer_key: 'b5vOZ3RqJMuOD3HAAuDWib6ZX',
@@ -19,4 +18,4 @@ class Application
     app.on 'ready', => @onReady()
 
   onReady: =>
-    new Timeline
+    new MainWindow
