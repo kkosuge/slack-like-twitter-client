@@ -18,14 +18,5 @@ class Application
 
     app.on 'ready', => @onReady()
 
-    @accessToken = null
-    @accessTokenSecret = null
-
-  openMainWindow: =>
-    new Timeline
-
   onReady: =>
-    new Authentication (credentials) =>
-      global.twitter_credentials.access_token_key = credentials.accessToken
-      global.twitter_credentials.access_token_secret = credentials.accessTokenSecret
-      @openMainWindow()
+    new Timeline
