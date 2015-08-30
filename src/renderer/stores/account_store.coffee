@@ -28,8 +28,8 @@ class AccountStore extends ReduceStore
 
   ready: =>
     @model.ready
-      .then =>
-        @model.clear()
+      #.then =>
+      #  @model.clear()
       .then =>
         @model.all()
       .then (accounts) =>
