@@ -15,9 +15,17 @@ class TwitterClient
       )
 
   fetchTimeline: (screen_name) =>
-    return new Promise (resolve, reject) =>
+    new Promise (resolve, reject) =>
       @client.get(
         'statuses/home_timeline',
         { screen_name: screen_name },
         (error, tweets, response) => resolve(tweets)
       )
+
+  fetchLists: ->
+    new Promise (resolve, reject) =>
+      @client.get(
+        'lists/list',
+        (error, lists, response) => resolve(lists)
+      )
+

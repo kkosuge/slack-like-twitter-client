@@ -6,7 +6,7 @@ module.exports =
 Tweets = React.createClass
   render: ->
     tweets = @props.tweets.map (tweet) ->
-      <Tweet tweet={ tweet } />
+      <Tweet key={ tweet.id_str } tweet={ tweet } />
 
     <div id="tweets">
       <div className="tweets">

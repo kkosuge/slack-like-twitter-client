@@ -1,5 +1,4 @@
 React = require 'react'
-Twitter = require('remote').require('twitter')
 
 module.exports =
 Profile = React.createClass
