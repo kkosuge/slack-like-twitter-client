@@ -12,16 +12,14 @@ class TwitterClient
     new Promise (resolve, reject) =>
       @client.get(
         'account/verify_credentials',
-        (error, account, response) => resolve(account)
-      )
+        (error, account, response) => resolve(account))
 
   fetchTimeline: (screen_name) =>
     new Promise (resolve, reject) =>
       @client.get(
         'statuses/home_timeline',
         { screen_name: screen_name },
-        (error, tweets, response) => resolve(tweets)
-      )
+        (error, tweets, response) => resolve(tweets))
 
   userStream: ->
     @client.stream(
@@ -30,14 +28,18 @@ class TwitterClient
         stream.on 'data', (data) =>
           Dispatcher.dispatch
             type: 'user-stream'
-            data: data
-    )
+            data: data)
 
   fetchLists: ->
     new Promise (resolve, reject) =>
       @client.get(
         'lists/list',
-        (error, lists, response) => resolve(lists)
-      )
+        (error, lists, response) => resolve(lists))
 
-
+  fetchList: (listId) =>
+    console.log listId
+    new Promise (resolve, reject) =>
+      @client.get(
+        'lists/statuses',
+        { list_id: listId },
+        (error, tweets, response) => resolve(tweets))

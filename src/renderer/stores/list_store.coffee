@@ -1,21 +1,29 @@
-EventEmitter = require('events').EventEmitter
+ReduceStore = require('flux/utils').ReduceStore
+Dispatcher = require '../dispatcher'
+Immutable = require 'immutable-store'
 
-class ListStore extends EventEmitter
-  constructor: ->
-    super()
-    @listsTable = {}
+class ListStore extends ReduceStore
+  getInitialState: ->
+    Immutable
+      lists: {}
 
   getLists: =>
-    lists = Object.keys(@listsTable).map (key) => @listsTable[key]
+    state = @getState()
+    lists = Object.keys(state.lists).map (key) => state.lists[key]
     lists.sort (a, b) => b.name - a.name
 
-  mergeList: (list) =>
-    @listsTable[list.name] = tweet
-    @emit('changed')
+  mergeLists: (state, lists) =>
+    _lists = {}
+    for list in lists
+      _lists[list.name] = list
+    state.lists.merge(_lists)
 
-  mergeLists: (lists) =>
-    for list in lists then @listsTable[list.name] = list
-    @emit('changed')
+  reduce: (state, action) =>
+    switch action.type
+      when 'fetch-lists'
+        @mergeLists(state, action.lists)
+      else
+        state
 
-global.list_store ||= new ListStore
+global.list_store ||= new ListStore(Dispatcher)
 module.exports = global.list_store

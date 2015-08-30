@@ -9,25 +9,28 @@ Twitter = remote.require 'node-twitter-api'
 BrowserWindow = remote.require('browser-window')
 Authentication = require '../authentication'
 AccountStore = require '../stores/account_store'
-listStore = require '../stores/list_store'
+ListStore = require '../stores/list_store'
 TimelineStore = require '../stores/timeline_store'
 TwitterClient = require '../twitter_client'
 TimelineAction = require '../actions/timeline_actions'
+ListAction = require '../actions/list_actions'
 Container = require('flux/utils').Container
 
 class Root extends React.Component
   @getStores: ->
-    [AccountStore, TimelineStore]
+    [AccountStore, TimelineStore, ListStore]
 
   @calculateState: (prevState, nextState) ->
     account: AccountStore.getAccount()
     tweets: TimelineStore.getTweets()
+    lists: ListStore.getLists()
 
   componentDidMount: ->
     if AccountStore.userExists()
       document.getElementById('webview').remove()
       (new TimelineAction(@state.account.credentails)).fetch()
-      (new TimelineAction(@state.account.credentails)).userStream()
+      #(new TimelineAction(@state.account.credentails)).userStream()
+      (new ListAction(@state.account.credentails)).fetch()
 
   render: ->
     unless AccountStore.userExists()
@@ -37,6 +40,7 @@ class Root extends React.Component
     <div className="container">
       <div className="side-menu">
         <Profile user={ @state.account.user }/>
+        <Lists lists={ @state.lists } />
       </div>
       <div className="main-article">
         <Tweets tweets={ @state.tweets } />
