@@ -1,6 +1,9 @@
-EventEmitter = require('events').EventEmitter
+ReduceStore = require('flux/utils').ReduceStore
 StoneSkin = require 'stone-skin/with-tv4'
 TwitterClient = require '../twitter_client'
+Dispatcher = require '../dispatcher'
+Immutable = require 'immutable-store'
+TimelineAction = require '../actions/timeline_actions'
 
 class Account extends StoneSkin.IndexedDb
   storeName: 'Account'
@@ -11,15 +14,22 @@ class Account extends StoneSkin.IndexedDb
       credentials:
         type: 'object'
 
-class AccountStore extends EventEmitter
-  constructor: ->
-    super()
+class AccountStore extends ReduceStore
+  constructor: (args) ->
+    super(args)
     @model = new Account
+
+  getInitialState: ->
+
+  reduce: (state, action) =>
+    null
+
+  addListener: ->
 
   ready: =>
     @model.ready
-      #.then =>
-      #  @model.clear()
+      .then =>
+        @model.clear()
       .then =>
         @model.all()
       .then (accounts) =>
@@ -39,12 +49,9 @@ class AccountStore extends EventEmitter
     @model.ready
       .then =>
         @model.save @account
-        @emit('changed', @account)
       .then =>
-        client = new TwitterClient(credentails)
-        client.fetchTimeline().then (tweets) =>
-          timelineStore.mergeTweets(tweets)
+        TimelineAction.fetch(credentails)
+        document.getElementById('webview').remove()
 
-
-global.account_store ||= new AccountStore
+global.account_store ||= new AccountStore(Dispatcher)
 module.exports = global.account_store

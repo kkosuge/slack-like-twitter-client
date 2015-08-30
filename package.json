@@ -28,6 +28,8 @@
     "gulp-slim": "^0.3.0"
   },
   "dependencies": {
+    "flux": "^2.1.1",
+    "immutable-store": "^0.5.5",
     "node-twitter-api": "^1.6.0",
     "stone-skin": "^0.1.3",
     "twitter": "^1.2.5"
