@@ -3,9 +3,14 @@ Dispatcher = require '../dispatcher'
 
 module.exports =
 class TimelineAction
-  @fetch: (credentails) ->
-    client = new TwitterClient(credentails)
-    client.fetchTimeline().then (tweets) =>
+  constructor: (credentails) ->
+    @client = new TwitterClient(credentails)
+
+  fetch: =>
+    @client.fetchTimeline().then (tweets) =>
       Dispatcher.dispatch
         type: 'timeline',
         tweets: tweets
+
+  userStream: =>
+    @client.userStream()

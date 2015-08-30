@@ -12,7 +12,7 @@ class TimelineStore extends ReduceStore
     tweets = Object.keys(state.tweets).map (key) => state.tweets[key]
     tweets.sort (a, b) => b.id - a.id
 
-  mergeTweet: (tweet) =>
+  mergeTweet: (state, tweet) =>
     state.tweets.set(tweet.id_str, tweet)
 
   mergeTweets: (state, tweets) ->
@@ -22,10 +22,16 @@ class TimelineStore extends ReduceStore
     state.tweets.merge(_tweets)
 
   reduce: (state, action) =>
-    if action.type is 'timeline'
-      @mergeTweets(state, action.tweets)
-    else
-      state
+    switch action.type
+      when 'timeline'
+        @mergeTweets(state, action.tweets)
+      when 'user-stream'
+        if action.data.created_at
+          @mergeTweet(state, action.data)
+        else
+          state
+      else
+        state
 
 global.timeline_store ||= new TimelineStore(Dispatcher)
 module.exports = global.timeline_store

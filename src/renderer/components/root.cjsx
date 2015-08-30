@@ -26,7 +26,8 @@ class Root extends React.Component
   componentDidMount: ->
     if AccountStore.userExists()
       document.getElementById('webview').remove()
-      TimelineAction.fetch(@state.account.credentails)
+      (new TimelineAction(@state.account.credentails)).fetch()
+      (new TimelineAction(@state.account.credentails)).userStream()
 
   render: ->
     unless AccountStore.userExists()
