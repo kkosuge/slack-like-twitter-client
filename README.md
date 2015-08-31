@@ -1,3 +1,3 @@
 # Slack-Like Twitter Client
 
-![](/screenshots/preview01.png)
+![](/screenshots/preview02.png)
