@@ -35,7 +35,6 @@ class TimelineStore extends ReduceStore
     state.set('currentType', list.name)
 
   reduce: (state, action) =>
-    console.log action.type
     switch action.type
       when 'timeline'
         @mergeTweets(state, 'home-timeline', action.tweets)

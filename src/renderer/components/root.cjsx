@@ -1,7 +1,6 @@
 $ = require 'jquery'
-Profile = require './profile'
-Lists = require './lists'
 Tweets = require './tweets'
+Sidebar = require './sidebar'
 TweetBox = require './tweet_box'
 React = require 'react'
 remote = require 'remote'
@@ -39,8 +38,10 @@ class Root extends React.Component
 
     <div className="container">
       <div className="side-menu">
-        <Profile user={ @state.account.user }/>
-        <Lists lists={ @state.lists } />
+        <Sidebar
+          user={ @state.account.user }
+          lists={ @state.lists }
+        />
       </div>
       <div className="main-article">
         <Tweets tweets={ @state.tweets } />

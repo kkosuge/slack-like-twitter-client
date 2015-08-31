@@ -37,7 +37,6 @@ class TwitterClient
         (error, lists, response) => resolve(lists))
 
   fetchList: (listId) =>
-    console.log listId
     new Promise (resolve, reject) =>
       @client.get(
         'lists/statuses',

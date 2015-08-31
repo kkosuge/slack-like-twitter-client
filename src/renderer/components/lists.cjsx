@@ -3,9 +3,7 @@ TimelineAction = require '../actions/timeline_actions'
 
 module.exports =
 Lists = React.createClass
-  showList: (event) =>
-    listName = event.target.getAttribute('data-list-name')
-    listId = event.target.getAttribute('data-list-id')
+  showList: (listId, listName) =>
     TimelineAction.showList
       name: listName
       id: listId
@@ -13,8 +11,8 @@ Lists = React.createClass
   render: ->
     lists = @props.lists.map (list) =>
       <div>
-        <li>
-          <a onClick={ @showList } key={ list.name } data-list-id={ list.id_str } data-list-name={ list.name }>{ list.name }</a>
+        <li onClick={ @showList.bind(this, list.id_str, list.name) } key={ list.id_str }>
+          <p>@{ list.user.screen_name }/{ list.name }</p>
         </li>
       </div>
 
