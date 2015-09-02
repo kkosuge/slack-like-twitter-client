@@ -1,7 +1,5 @@
 remote = require 'remote'
-EventEmitter = require('events').EventEmitter
 Twitter = remote.require('twitter')
-Dispatcher = require './dispatcher'
 
 module.exports =
 class TwitterClient
@@ -21,14 +19,14 @@ class TwitterClient
         { screen_name: screen_name },
         (error, tweets, response) => resolve(tweets))
 
-  userStream: ->
-    @client.stream(
-      'user',
-      (stream) =>
-        stream.on 'data', (data) =>
-          Dispatcher.dispatch
-            type: 'user-stream'
-            data: data)
+ # userStream: ->
+ #   @client.stream(
+ #     'user',
+ #     (stream) =>
+ #       stream.on 'data', (data) =>
+ #         Dispatcher.dispatch
+ #           type: 'user-stream'
+ #           data: data)
 
   fetchLists: ->
     new Promise (resolve, reject) =>
