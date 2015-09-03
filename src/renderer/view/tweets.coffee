@@ -2,7 +2,7 @@ Account = require '../model/account'
 TwitterClient = require '../twitter_client'
 m = require 'mithril'
 
-class Tweets
+class Tweet
   constructor: ->
     @tweets = m.prop({})
 
@@ -22,28 +22,28 @@ class Tweets
     tweets.sort (a, b) => b.id - a.id
 
 class ViewModel
-  constructor: ->
-    @tweets_model = new Tweets
-    @client = new TwitterClient
-
+  constructor: (client, params) ->
+    @tweet  = new Tweet
+    @client = new client
     @tweets = m.prop([])
 
-    @client.fetchTimeline().then (tweets) =>
-      @tweets_model.mergeTweets(tweets)
-      @tweets(@tweets_model.get())
+    @client.get(params).then (tweets) =>
+      @tweet.mergeTweets(tweets)
+      @tweets(@tweet.get())
       m.redraw()
 
-    @client.getTwitter().stream 'user', (stream) =>
-      stream.on 'data', (data) =>
-        if data.created_at
-          @tweets_model.mergeTweet(data)
-          @tweets(@tweets_model.get())
-          m.redraw()
+   # @client.getTwitter().stream 'user', (stream) =>
+   #   stream.on 'data', (data) =>
+   #     console.log data
+   #     if data.created_at
+   #       @tweet.mergeTweet(data)
+   #       @tweets(@tweet.get())
+   #       m.redraw()
 
 module.exports =
-class Timeline
-  constructor: ->
-    @vm = new ViewModel()
+class Tweets
+  constructor: (client, params) ->
+    @vm = new ViewModel(client, params)
 
   view: =>
     m ".tweets", @vm.tweets().map (tweet) ->

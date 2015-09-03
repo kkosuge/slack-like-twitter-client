@@ -1,9 +1,10 @@
 $ = require 'jquery'
 m = require 'mithril'
 Profile = require './view/profile'
-Timeline = require './view/timeline'
+Tweets = require './view/tweets'
 TweetBox = require './view/tweet_box'
 Lists = require './view/lists'
+Timeline = require './model/timeline'
 Account = require './model/account'
 Authentication = require './authentication'
 
@@ -26,10 +27,9 @@ class Application
            view: (new Profile).view
           m.mount document.getElementById("lists"),
            view: (new Lists()).view
-          m.mount document.getElementById("tweets"),
-           view: (new Timeline()).view
           m.mount document.getElementById("tweet-box"),
            view: (new TweetBox()).view
+          Timeline.homeTimeline()
 
 $ ->
   new Application

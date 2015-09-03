@@ -1,17 +1,24 @@
-TwitterClient = require '../twitter_client'
+TwitterClient = require '../twitter_client/twitter_client'
 m = require 'mithril'
 
 class ViewModel
-  constructor: () ->
+  constructor: ->
+    @text = m.prop('')
+
+  tweet: =>
+    client = new TwitterClient
+    client.postTweet(@text()).then (response) => @text('')
+
 
 module.exports =
 class TweetBox
-  constructor: () ->
+  constructor: ->
+    @vm = new ViewModel
 
   view: =>
     m ".tweet-form.ui.form", [
-      m "textarea", { rows: 3 }
+      m "textarea", rows: 3, onchange: m.withAttr("value", @vm.text), value: @vm.text()
       m ".tweet-panel", [
-        m "button", { class: "ui mini twitter button" }, "POST"
+        m "button", { onclick: @vm.tweet,  class: "ui mini twitter button" }, "POST"
       ]
     ]
