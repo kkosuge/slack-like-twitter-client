@@ -6,6 +6,8 @@ class TwitterClient
   constructor: (credentails) ->
     @client = new Twitter(global.accounts[0].credentails)
 
+  getTwitter: => @client
+
   fetchAccount: =>
     new Promise (resolve, reject) =>
       @client.get(
@@ -17,15 +19,6 @@ class TwitterClient
       @client.get(
         'statuses/home_timeline',
         (error, tweets, response) => resolve(tweets))
-
- # userStream: ->
- #   @client.stream(
- #     'user',
- #     (stream) =>
- #       stream.on 'data', (data) =>
- #         Dispatcher.dispatch
- #           type: 'user-stream'
- #           data: data)
 
   fetchLists: ->
     new Promise (resolve, reject) =>
