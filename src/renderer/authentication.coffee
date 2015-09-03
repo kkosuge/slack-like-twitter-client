@@ -1,7 +1,8 @@
 remote = require 'remote'
 Twitter = remote.require 'node-twitter-api'
-accountStore = require './stores/account_store'
+Account = require './model/account'
 TwitterClient = require './twitter_client'
+Application = require './application'
 
 module.exports =
 class Authentication
@@ -43,14 +44,20 @@ class Authentication
       @watchRedirectRequest()
 
   updateAccount: =>
-    client = new TwitterClient
+    credentails =
       consumer_key: @consumerKey
       consumer_secret: @consumerSecret
       access_token_key: @accessToken
       access_token_secret: @accessTokenSecret
+    client = new TwitterClient(credentails)
     client.fetchAccount().then (user) =>
-      accountStore.create user,
-        consumer_key: @consumerKey
-        consumer_secret: @consumerSecret
-        access_token_key: @accessToken
-        access_token_secret: @accessTokenSecret
+      account = new Account
+      account.ready
+        .then =>
+          account.save
+            _id: user.id_str
+            user: user
+            credentails: credentails
+        .then =>
+          document.getElementById('webview').remove()
+          location.reload()
