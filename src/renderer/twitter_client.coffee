@@ -4,7 +4,9 @@ Twitter = remote.require('twitter')
 module.exports =
 class TwitterClient
   constructor: (credentails) ->
-    @client = new Twitter(global.accounts[0].credentails)
+    unless credentails
+      credentails = global.accounts[0].credentails
+    @client = new Twitter(credentails)
 
   getTwitter: => @client
 
