@@ -14,15 +14,14 @@ $ ->
     .then =>
       @account.all()
     .then (accounts) =>
-      account = accounts[0]
-      account = if account? then account else {}
-
+      global.accounts = accounts
       document.getElementById("webview").remove()
+
       m.mount document.getElementById("profile"),
        view: (new Profile).view
       m.mount document.getElementById("lists"),
-       view: (new Lists(account)).view
+       view: (new Lists()).view
       m.mount document.getElementById("tweets"),
-       view: (new Timeline(account)).view
+       view: (new Timeline()).view
       m.mount document.getElementById("tweet-box"),
-       view: (new TweetBox(account)).view
+       view: (new TweetBox()).view

@@ -4,7 +4,7 @@ Twitter = remote.require('twitter')
 module.exports =
 class TwitterClient
   constructor: (credentails) ->
-    @client = new Twitter(credentails)
+    @client = new Twitter(global.accounts[0].credentails)
 
   fetchAccount: =>
     new Promise (resolve, reject) =>
@@ -16,7 +16,6 @@ class TwitterClient
     new Promise (resolve, reject) =>
       @client.get(
         'statuses/home_timeline',
-        { screen_name: screen_name },
         (error, tweets, response) => resolve(tweets))
 
  # userStream: ->

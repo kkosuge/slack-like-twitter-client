@@ -1,13 +1,12 @@
-Account = require '../model/account'
 TwitterClient = require '../twitter_client'
 m = require 'mithril'
 
 class ViewModel
-  constructor: (account) ->
+  constructor: () ->
 
 module.exports =
 class TweetBox
-  constructor: (account) ->
+  constructor: () ->
 
   view: =>
     m ".tweet-form.ui.form", [

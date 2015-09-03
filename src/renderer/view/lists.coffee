@@ -2,9 +2,9 @@ TwitterClient = require '../twitter_client'
 m = require 'mithril'
 
 class ViewModel
-  constructor: (account) ->
+  constructor: () ->
     @lists = m.prop([{ user: {} }])
-    @client = new TwitterClient(account.credentails)
+    @client = new TwitterClient()
     @client.fetchLists()
       .then (lists) =>
         @lists(lists)
@@ -12,8 +12,8 @@ class ViewModel
 
 module.exports =
 class Lists
-  constructor: (account) ->
-    @vm = new ViewModel(account)
+  constructor: ->
+    @vm = new ViewModel()
 
   view: =>
     m "h3", "LIST"

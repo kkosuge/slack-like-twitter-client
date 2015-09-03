@@ -3,18 +3,18 @@ TwitterClient = require '../twitter_client'
 m = require 'mithril'
 
 class ViewModel
-  constructor: (account) ->
+  constructor: () ->
     @tweets = m.prop([{ user: {} }])
-    @client = new TwitterClient(account.credentails)
-    @client.fetchTimeline(account.user.screen_name)
+    @client = new TwitterClient()
+    @client.fetchTimeline()
       .then (tweets) =>
         @tweets(tweets)
         m.redraw()
 
 module.exports =
 class Timeline
-  constructor: (account) ->
-    @vm = new ViewModel(account)
+  constructor: () ->
+    @vm = new ViewModel()
 
   view: =>
     m ".tweets", @vm.tweets().map (tweet) ->
