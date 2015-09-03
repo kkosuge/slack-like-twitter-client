@@ -3,6 +3,7 @@ m = require 'mithril'
 Profile = require './view/profile'
 Timeline = require './view/timeline'
 TweetBox = require './view/tweet_box'
+Lists = require './view/lists'
 Account = require './model/account'
 
 $ ->
@@ -19,6 +20,8 @@ $ ->
       document.getElementById("webview").remove()
       m.mount document.getElementById("profile"),
        view: (new Profile).view
+      m.mount document.getElementById("lists"),
+       view: (new Lists(account)).view
       m.mount document.getElementById("tweets"),
        view: (new Timeline(account)).view
       m.mount document.getElementById("tweet-box"),
