@@ -11,8 +11,11 @@ class ViewModel
         @lists(lists)
         m.redraw()
 
-  show: (list) ->
+  showList: (list) =>
     Timeline.list(list.id_str)
+
+  showHomeTimeline: =>
+    Timeline.homeTimeline()
 
 module.exports =
 class Lists
@@ -20,10 +23,20 @@ class Lists
     @vm = new ViewModel()
 
   view: =>
-    m "h3", "LIST"
-    m ".channel-list", [
-      m "ul", @vm.lists().map (list) =>
-        m "li", onclick: @vm.show.bind(this, list), [
-          m "p", "@#{list.user.screen_name}/#{list.name}"
+    m "div", [
+      m "h3", "HOME"
+      m ".channel-list", [
+        m "ul", [
+          m "li", onclick: @vm.showHomeTimeline.bind(this), [
+            m "p", "TIMELINE"
+          ]
         ]
+      ]
+      m "h3", "LIST"
+      m ".channel-list", [
+        m "ul", @vm.lists().map (list) =>
+          m "li", onclick: @vm.showList.bind(this, list), [
+            m "p", "@#{list.user.screen_name}/#{list.name}"
+          ]
+      ]
     ]
