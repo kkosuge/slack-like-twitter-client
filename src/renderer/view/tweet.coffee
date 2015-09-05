@@ -19,12 +19,28 @@ class ViewModel
     entities = @getUrlEntities().filter (urlEntity) => urlEntity.url is url
     entities[0]
 
+  media: =>
+    images = []
+    if @tweet().entities.media
+      @tweet().entities.media.forEach (media) =>
+        switch media.type
+          when 'photo'
+            images.push(m "img", { src: media.media_url_https })
+
+    if images.length
+      m ".media", images
+
   body: =>
     body = twttr.htmlEscape(@tweet().text)
     if @tweet().entities.urls.length
       @tweet().entities.urls.forEach (entity) =>
-        body = body.replace(entity.url,
-        """<a onclick="Helper.openUrl('#{entity.url}')">#{entity.display_url}</a>""")
+        body = body.replace entity.url,
+        """<a onclick="Helper.openUrl('#{entity.url}')">#{entity.display_url}</a>"""
+
+    if @tweet().entities.media
+      @tweet().entities.media.forEach (media) =>
+        body = body.replace media.url,
+        """<a onclick="Helper.openUrl('#{media.url}')">#{media.display_url}</a>"""
 
     body
 
@@ -44,5 +60,6 @@ class Tweet
             m ".screen-name", "@#{@vm.tweet().user.screen_name}"
           ]
           m ".text", m.trust @vm.body()
+          @vm.media()
         ]
       ]
