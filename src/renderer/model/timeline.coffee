@@ -8,6 +8,7 @@ class Timeline
     @windows = m.prop({})
     @title = m.prop('')
     @windowId = m.prop(null)
+    @filterWord = m.prop('')
 
   stream: =>
     windowId = "home-timeline"
@@ -30,6 +31,10 @@ class Timeline
     windows[windowId] ||= new Tweets(ListClient, list.id_str)
     @windows(windows)
     @windowId(windowId)
+
+  filter: (text) =>
+    @filterWord(text)
+    @currentWindow().filter(text)
 
   currentWindow: =>
     @windows()[@windowId()]

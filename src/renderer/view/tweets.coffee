@@ -30,6 +30,7 @@ class ViewModel
     @client = new client
     @tweets = m.prop([])
     @params = params
+    @filter = m.prop('')
     @reload()
 
   reload: =>
@@ -57,6 +58,16 @@ class Tweets
   reload: =>
     @vm.reload()
 
+  filter: (text) =>
+    @vm.filter(text)
+    m.redraw()
+
+  tweets: =>
+    if @vm.filter().length
+      @vm.tweets().filter (tweet) => (new RegExp(@vm.filter())).test(tweet.text)
+    else
+      @vm.tweets()
+
   view: =>
-    m "#tweets.tweets", @vm.tweets().map (tweet) =>
+    m "#tweets.tweets", @tweets().map (tweet) =>
       m.component (new Tweet(tweet)), { key: tweet.id }
