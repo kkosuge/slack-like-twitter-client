@@ -1,4 +1,3 @@
-$ = require 'jquery'
 m = require 'mithril'
 Profile = require './view/profile'
 Tweets = require './view/tweets'
@@ -32,5 +31,5 @@ class Application
            view: (new TweetBox()).view
           Timeline.homeTimeline()
 
-$ ->
+window.onload = ->
   new Application
