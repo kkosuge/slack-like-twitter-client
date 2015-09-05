@@ -30,6 +30,7 @@ class Application
           m.mount document.getElementById("tweet-box"),
            view: (new TweetBox()).view
           Timeline.homeTimeline()
+          Timeline.stream()
 
 window.onload = ->
   new Application

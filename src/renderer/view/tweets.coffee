@@ -35,18 +35,21 @@ class ViewModel
       @tweets(@tweet.get())
       m.redraw()
 
-   # @client.getTwitter().stream 'user', (stream) =>
-   #   stream.on 'data', (data) =>
-   #     console.log data
-   #     if data.created_at
-   #       @tweet.mergeTweet(data)
-   #       @tweets(@tweet.get())
-   #       m.redraw()
+  stream: =>
+    @client.getTwitter().stream 'user', (stream) =>
+      stream.on 'data', (data) =>
+        if data.text
+          @tweet.mergeTweet(data)
+          @tweets(@tweet.get())
+          m.redraw()
 
 module.exports =
 class Tweets
   constructor: (client, params) ->
     @vm = new ViewModel(client, params)
+
+  stream: =>
+    @vm.stream()
 
   view: =>
     m ".tweets", @vm.tweets().map (tweet) =>

@@ -7,6 +7,12 @@ class Timeline
   constructor: ->
     @windows = m.prop({})
 
+  stream: =>
+    windowId = "home-timeline"
+    windows = @windows()
+    windows[windowId] ||= new Tweets(HomeTimelineClient)
+    windows[windowId].stream()
+
   homeTimeline: =>
     windowId = "home-timeline"
     windows = @windows()
