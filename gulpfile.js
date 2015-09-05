@@ -1,15 +1,16 @@
 var gulp = require('gulp');
 var less = require('gulp-less');
 var stylus = require('gulp-stylus');
-var slim = require("gulp-slim");
+var jade = require("gulp-jade");
 var coffee = require('gulp-coffee');
 var cjsx = require('gulp-cjsx');
 var plumber = require('gulp-plumber');
+var jade = require("gulp-jade")
 var del = require('del');
 
 var paths = {
   coffee: ['./src/**/*.coffee'],
-  slim: ['./src/**/*.slim'],
+  jade: ['./src/**/*.jade'],
   less: ['./src/**/*.less'],
   stylus: ['./src/**/*.styl'],
   cjsx: ['./src/**/*.cjsx'],
@@ -31,10 +32,10 @@ gulp.task('main', ['clean'], function() {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('slim', ['clean'], function(){
-  return gulp.src(paths.slim)
+gulp.task('jade', ['clean'], function(){
+  return gulp.src(paths.jade)
     .pipe(plumber())
-    .pipe(slim({
+    .pipe(jade({
       pretty: true
     }))
     .pipe(gulp.dest('build'));
@@ -67,10 +68,10 @@ gulp.task('cjsx', ['clean'], function() {
 gulp.task('watch', function() {
   gulp.watch('./main.coffee', ['main']);
   gulp.watch(paths.coffee, ['coffee']);
-  gulp.watch(paths.slim, ['slim']);
+  gulp.watch(paths.jade, ['jade']);
   gulp.watch(paths.less, ['less']);
   gulp.watch(paths.stylus, ['stylus']);
   gulp.watch(paths.cjsx, ['cjsx']);
 });
 
-gulp.task('default', ['watch', 'coffee', 'slim', 'main', 'less', 'cjsx', 'stylus']);
+gulp.task('default', ['watch', 'coffee', 'jade', 'main', 'less', 'cjsx', 'stylus']);
