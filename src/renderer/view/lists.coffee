@@ -12,7 +12,7 @@ class ViewModel
         m.redraw()
 
   showList: (list) =>
-    Timeline.list(list.id_str)
+    Timeline.list(list)
 
   showHomeTimeline: =>
     Timeline.homeTimeline()

@@ -29,8 +29,11 @@ class ViewModel
     @tweet  = new TweetModel
     @client = new client
     @tweets = m.prop([])
+    @params = params
+    @reload()
 
-    @client.get(params).then (tweets) =>
+  reload: =>
+    @client.get(@params).then (tweets) =>
       @tweet.mergeTweets(tweets)
       @tweets(@tweet.get())
       m.redraw()
@@ -51,6 +54,9 @@ class Tweets
   stream: =>
     @vm.stream()
 
+  reload: =>
+    @vm.reload()
+
   view: =>
-    m ".tweets", @vm.tweets().map (tweet) =>
+    m "#tweets.tweets", @vm.tweets().map (tweet) =>
       m.component (new Tweet(tweet)), { key: tweet.id }

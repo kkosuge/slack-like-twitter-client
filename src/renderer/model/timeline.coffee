@@ -6,6 +6,8 @@ ListClient = require '../twitter_client/list_client'
 class Timeline
   constructor: ->
     @windows = m.prop({})
+    @title = m.prop('')
+    @windowId = m.prop(null)
 
   stream: =>
     windowId = "home-timeline"
@@ -14,22 +16,34 @@ class Timeline
     windows[windowId].stream()
 
   homeTimeline: =>
+    @title("HOME TIMELINE")
     windowId = "home-timeline"
     windows = @windows()
     windows[windowId] ||= new Tweets(HomeTimelineClient)
     @windows(windows)
-    @mount(windowId)
+    @windowId(windowId)
 
-  list: (listId) =>
-    windowId = "list-#{listId}"
+  list: (list) =>
+    @title("LIST @#{list.user.screen_name}/#{list.name}")
+    windowId = "list-#{list.id_str}"
     windows = @windows()
-    windows[windowId] ||= new Tweets(ListClient, listId)
+    windows[windowId] ||= new Tweets(ListClient, list.id_str)
     @windows(windows)
-    @mount(windowId)
+    @windowId(windowId)
 
-  mount: (windowId) =>
-    m.mount document.getElementById("tweets"),
-      view: @windows()[windowId].view
+  currentWindow: =>
+    @windows()[@windowId()]
+
+  setAutoRefresh: =>
+    setInterval =>
+      @currentWindow().reload()
+    , 1000*45
+
+  tweets: =>
+    if @windowId()
+      @currentWindow()
+    else
+      { view: (->) }
 
 global._timeline ||= new Timeline
 module.exports = global._timeline

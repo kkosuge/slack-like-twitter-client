@@ -3,6 +3,8 @@ Profile = require './view/profile'
 Tweets = require './view/tweets'
 TweetBox = require './view/tweet_box'
 Lists = require './view/lists'
+Header = require './view/header'
+Main = require './view/main'
 Timeline = require './model/timeline'
 Account = require './model/account'
 Authentication = require './authentication'
@@ -27,10 +29,13 @@ class Application
            view: (new Profile).view
           m.mount document.getElementById("lists"),
            view: (new Lists()).view
-          m.mount document.getElementById("tweet-box"),
-           view: (new TweetBox()).view
-          Timeline.homeTimeline()
-          Timeline.stream()
+
+          main = new Main()
+          m.mount document.getElementById("main-article"),
+           view: main.view
+          setTimeout ->
+            main.getInitialTimeline()
+          , 200
 
 window.onload = ->
   new Application

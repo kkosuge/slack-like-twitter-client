@@ -16,7 +16,7 @@ class TweetBox
     @vm = new ViewModel
 
   view: =>
-    m ".tweet-form.ui.form", [
+    m "#tweet-box.tweet-form.ui.form", [
       m "textarea", rows: 3, onchange: m.withAttr("value", @vm.text), value: @vm.text()
       m ".tweet-panel", [
         m "button", { onclick: @vm.tweet,  class: "ui mini twitter button" }, "POST"

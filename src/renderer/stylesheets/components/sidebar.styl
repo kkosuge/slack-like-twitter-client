@@ -1,0 +1,62 @@
+.side-menu
+  width 220px
+  background-color #3e313c
+  color #FFF
+
+  .user
+    display flex
+    height 32px
+    padding-left 16px
+    margin-top 16px
+
+    .profile-image
+      img 
+        width 32px
+    .screen-name 
+      margin-left 10px
+      font-size 1.125rem
+      line-height 32px
+
+  h3
+    padding-left 16px
+    font-size .8rem
+    line-height 1.25rem
+    margin-top 20px
+    margin-bottom 10px
+    text-transform uppercase
+    font-weight 700
+    color #ab9ba9
+
+  .channel-list
+    ul
+      list-style none
+      margin-top 10px
+      padding 0
+      li
+        margin-right 16px
+        border-radius 0 4px 4px 0
+        padding-left 16px
+        color #ab9ba9
+        font-size 1rem
+        line-height 1.5rem
+        height 1.5rem
+        position relative
+        text-shadow 0 1px 1px rgba(0,0,0,.25)
+        cursor pointer
+        &.active
+          background #4c9689
+          color #FFF
+          a
+            color #FFF
+        &:hover
+          background-color #4c9689
+          color #FFF
+        .prefix
+          font-weight 300
+          opacity .5
+          margin-right 2px
+        a
+          color #ab9ba9
+          display block
+
+
