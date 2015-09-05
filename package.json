@@ -4,7 +4,18 @@
   "description": "",
   "main": "build/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf packages/slack-like-twitter-client-{darwin,linux,win32}-x64",
+    "compile": "gulp compile",
+    "package": "electron-packager . slack-like-twitter-client --arch=x64 --out=packages/ --platform=darwin,linux,win32 --version=0.30.6 --ignore=packages/*",
+    "release": "npm run package && npm run zip && npm run clean && npm run upload",
+    "setup": "npm install && brew tap tcnksm/ghr && brew install ghr && npm run compile",
+    "start": "electron .",
+    "upload": "ghr v0.0.4 packages/",
+    "watch": "gulp watch",
+    "zip": "npm run zip-darwin && npm run zip-win32 && npm run zip-linux",
+    "zip-darwin": "cd packages && zip -r slack-like-twitter-client-darwin-x64.zip slack-like-twitter-client-darwin-x64",
+    "zip-win32": "cd packages && zip -r slack-like-twitter-client-win32-x64.zip slack-like-twitter-client-win32-x64",
+    "zip-linux": "cd packages && zip -r slack-like-twitter-client-linux-x64.zip slack-like-twitter-client-linux-x64"
   },
   "repository": {
     "type": "git",
