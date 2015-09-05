@@ -1,4 +1,4 @@
-TwitterClient = require '../twitter_client'
+TwitterClient = require '../twitter_client/twitter_client'
 Timeline = require '../model/timeline'
 m = require 'mithril'
 

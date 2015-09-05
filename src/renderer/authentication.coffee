@@ -1,7 +1,7 @@
 remote = require 'remote'
 Twitter = remote.require 'node-twitter-api'
 Account = require './model/account'
-TwitterClient = require './twitter_client'
+TwitterClient = require './twitter_client/twitter_client'
 Application = require './application'
 
 module.exports =

@@ -7,6 +7,7 @@ Lists = require './view/lists'
 Timeline = require './model/timeline'
 Account = require './model/account'
 Authentication = require './authentication'
+require './helper/helper'
 
 class Application
   constructor: ->

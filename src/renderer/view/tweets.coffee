@@ -1,8 +1,11 @@
 Account = require '../model/account'
-TwitterClient = require '../twitter_client'
+TwitterClient = require '../twitter_client/twitter_client'
+Helper = require '../helper/helper'
+Tweet = require './tweet'
+twttr = require 'twitter-text'
 m = require 'mithril'
 
-class Tweet
+class TweetModel
   constructor: ->
     @tweets = m.prop({})
 
@@ -23,7 +26,7 @@ class Tweet
 
 class ViewModel
   constructor: (client, params) ->
-    @tweet  = new Tweet
+    @tweet  = new TweetModel
     @client = new client
     @tweets = m.prop([])
 
@@ -46,16 +49,5 @@ class Tweets
     @vm = new ViewModel(client, params)
 
   view: =>
-    m ".tweets", @vm.tweets().map (tweet) ->
-      m ".tweet", [
-        m ".profile-image", [
-          m "img", { src: tweet.user.profile_image_url }
-        ]
-        m ".contents", [
-          m ".name-contentes", [
-            m ".name", tweet.user.name
-            m ".screen-name", tweet.user.screen_name
-          ]
-          m ".text", tweet.text
-        ]
-    ]
+    m ".tweets", @vm.tweets().map (tweet) =>
+      m.component (new Tweet(tweet)), { key: tweet.id }
