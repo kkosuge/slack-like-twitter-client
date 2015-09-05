@@ -1,0 +1,33 @@
+.tweet
+  display flex
+  margin 10px 0
+  margin-bottom 16px
+
+  .profile-image
+    position relative
+    width 42px
+    height 42px
+    img
+      width 42px
+      border-radius 4px
+  .contents
+    flex 1
+    margin-left 10px
+  .name-contents
+    display flex
+    .name
+      font-weight bold
+    .screen-name
+      margin-left 4px
+  .created-at
+    margin-left 4px
+    color #9C9C9C
+  .media
+    margin-top 12px
+
+  &.retweet
+    .retweet-user
+      position absolute
+      right -4px
+      bottom -4px
+      width 20px
