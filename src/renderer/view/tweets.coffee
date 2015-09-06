@@ -8,6 +8,7 @@ m = require 'mithril'
 class TweetModel
   constructor: ->
     @tweets = m.prop({})
+    @className = m.prop('')
 
   mergeTweets: (tweets) =>
     _tweets = @tweets()
@@ -56,6 +57,8 @@ module.exports =
 class Tweets
   constructor: (client, params) ->
     @vm = new ViewModel(client, params)
+    @windowId = m.prop(params.windowId)
+    @currentWindowId = m.prop('')
 
   stream: =>
     @vm.stream()
@@ -72,6 +75,6 @@ class Tweets
     else
       @vm.tweets()
 
-  view: =>
-    m "#tweets.tweets", @tweets().map (tweet) =>
-      m.component (new Tweet(tweet)), { key: tweet.id }
+  view: (ctrl, args) =>
+    m "div", { class: args.className, 'data-window-id': @windowId() }, @tweets().map (tweet) =>
+      m.component (new Tweet(tweet)), key: "#{@windowId()}-#{tweet.id}"

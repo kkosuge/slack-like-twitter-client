@@ -2,6 +2,7 @@ Header = require './header'
 Tweets = require './tweets'
 TweetBox = require './tweet_box'
 Timeline = require '../model/timeline'
+TimelineView = require './timeline'
 m = require 'mithril'
 
 class ViewModel
@@ -19,7 +20,7 @@ class Main
 
   view: =>
     [
-      m.component (new Header()), { key: 'header' }
-      m.component Timeline.tweets(), { key: 'tweets' }
-      m.component (new TweetBox()), { key: 'tweet-box' }
+      m.component (new Header), { key: 'header' }
+      m.component (new TimelineView), { key: 'timeline' }
+      m.component (new TweetBox), { key: 'tweet-box' }
     ]

@@ -4,9 +4,9 @@ TwitterClient = require './twitter_client'
 
 module.exports =
 class ListClient extends TwitterClient
-  get: (listId) =>
+  get: (params) =>
     new Promise (resolve, reject) =>
       @client.get(
         'lists/statuses',
-        { list_id: listId },
+        { list_id: params.listId },
         (error, tweets, response) => resolve(tweets))

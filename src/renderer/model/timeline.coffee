@@ -13,28 +13,34 @@ class Timeline
   stream: =>
     windowId = "home-timeline"
     windows = @windows()
-    windows[windowId] ||= new Tweets(HomeTimelineClient)
+    windows[windowId] ||= new Tweets(HomeTimelineClient, windowId: windowId)
     windows[windowId].stream()
 
   homeTimeline: =>
     @title("HOME TIMELINE")
     windowId = "home-timeline"
     windows = @windows()
-    windows[windowId] ||= new Tweets(HomeTimelineClient)
+    windows[windowId] ||= new Tweets(HomeTimelineClient, windowId: windowId)
     @selectWindow(windows, windowId)
 
   list: (list) =>
     @title("LIST @#{list.user.screen_name}/#{list.name}")
     windowId = "list-#{list.id_str}"
     windows = @windows()
-    windows[windowId] ||= new Tweets(ListClient, list.id_str)
+    windows[windowId] ||= new Tweets(ListClient, windowId: windowId, listId: list.id_str)
     @selectWindow(windows, windowId)
 
   selectWindow: (windows, windowId) =>
     @windows(windows)
     @windowId(windowId)
-    m.redraw()
-    Helper.scrollToBottom()
+    setTimeout Helper.scrollToBottom, 150
+    boxes = document.getElementsByClassName('tweet-box')
+    _(boxes.length).times (i) =>
+      id = boxes[i].getAttribute('data-window-id')
+      if @windowId() is id
+        boxes[i].classList.remove('tweets-hide')
+      else
+        boxes[i].classList.add('tweets-hide')
 
   filter: (text) =>
     @filterWord(text)

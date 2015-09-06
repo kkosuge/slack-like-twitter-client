@@ -49,6 +49,7 @@
     "stylus": "^0.52.4",
     "twitter": "^1.2.5",
     "twitter-text": "^1.13.2",
+    "underscore": "^1.8.3",
     "velocity": "^0.7.2"
   }
 }
