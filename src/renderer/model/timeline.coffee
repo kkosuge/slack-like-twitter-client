@@ -35,7 +35,7 @@ class Timeline
     @windowId(windowId)
     setTimeout Helper.scrollToBottom, 150
     boxes = document.getElementsByClassName('tweet-box')
-    _(boxes.length).times (i) =>
+    _.times boxes.length, (i) =>
       id = boxes[i].getAttribute('data-window-id')
       if @windowId() is id
         boxes[i].classList.remove('tweets-hide')

@@ -2,7 +2,7 @@ shell = require('shell')
 
 window.$ = require 'jquery'
 window.m = require 'mithril'
-window._ = require 'underscore'
+window._ = require 'lodash'
 window.Velocity = require 'velocity'
 window.pp = (object) -> console.log JSON.stringify(object, null, 2)
 
