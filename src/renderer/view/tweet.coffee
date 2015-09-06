@@ -66,6 +66,9 @@ class Tweet
   constructor: (tweet) ->
     @vm = new ViewModel(tweet)
 
+  controller: ->
+    m.redraw.strategy("none")
+
   view: =>
     if @vm.tweet().retweeted_status
       m ".tweet.retweet", [
