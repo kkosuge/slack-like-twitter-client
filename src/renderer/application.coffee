@@ -31,11 +31,16 @@ class Application
            view: (new Lists()).view
 
           main = new Main()
-          m.mount document.getElementById("main-article"),
-           view: main.view
+          main.getInitialTimeline()
           setTimeout ->
-            main.getInitialTimeline()
-          , 200
+            m.mount document.getElementById("main-article"),
+             view: main.view
+          , 2000
 
 window.onload = ->
   new Application
+
+  ob = new MutationObserver (mutations) ->
+    Helper.scrollToBottom()
+  config = { attributes: true, childList: true, characterData: true }
+  ob.observe(document.getElementById('main-article'), config)

@@ -4,8 +4,8 @@ module.exports =
 class MainWindow
   constructor: ->
     window = new BrowserWindow
-      width: 990,
-      height: 700
+      width: 1200,
+      height: 900
     window.loadUrl("file://#{__dirname}/../index.html")
 
     window.on 'closed', =>

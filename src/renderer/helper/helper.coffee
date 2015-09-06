@@ -1,5 +1,8 @@
 shell = require('shell')
 
+window.$ = require 'jquery'
+window.m = require 'mithril'
+window.Velocity = require 'velocity'
 window.pp = (object) -> console.log JSON.stringify(object, null, 2)
 
 module.exports = window.Helper =
@@ -8,3 +11,12 @@ module.exports = window.Helper =
 
   openUrl: (url) =>
     shell.openExternal(url)
+
+  scrollToBottom: =>
+    el = document.getElementById('tweets')
+    if el?
+      $(el).scrollTop(el.scrollHeight)
+    else
+      setTimeout(@scrollToBottom, 100)
+
+

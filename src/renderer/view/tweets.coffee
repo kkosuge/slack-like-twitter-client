@@ -21,8 +21,9 @@ class TweetModel
     @tweets(_tweets)
 
   get: =>
-    tweets = Object.keys(@tweets()).map (key) => @tweets()[key]
-    tweets.sort (a, b) => b.id - a.id
+    ids = Object.keys(@tweets())
+    keys = (ids.sort (a, b) => b - a).slice(0,100).reverse()
+    keys.map (key) => @tweets()[key]
 
 class ViewModel
   constructor: (client, params) ->
@@ -37,7 +38,7 @@ class ViewModel
     @client.get(@params).then (tweets) =>
       @tweet.mergeTweets(tweets)
       @tweets(@tweet.get())
-      m.redraw()
+      @redraw()
 
   stream: =>
     @client.getTwitter().stream 'user', (stream) =>
@@ -45,7 +46,11 @@ class ViewModel
         if data.text
           @tweet.mergeTweet(data)
           @tweets(@tweet.get())
-          m.redraw()
+          @redraw()
+
+  redraw: =>
+    m.redraw()
+    Helper.scrollToBottom()
 
 module.exports =
 class Tweets
@@ -60,7 +65,6 @@ class Tweets
 
   filter: (text) =>
     @vm.filter(text)
-    m.redraw()
 
   tweets: =>
     if @vm.filter().length
