@@ -40,7 +40,7 @@ class Authentication
       @requestTokenSecret = requestTokenSecret
       url = @twitter.getAuthUrl(requestToken)
       document.getElementById('webview').innerHTML =
-        "<webview src='#{url}' id='twitter-auth'></webview>"
+        "<webview src='#{url}' id='twitter-auth' nodeintegration></webview>"
       @watchRedirectRequest()
 
   updateAccount: =>
