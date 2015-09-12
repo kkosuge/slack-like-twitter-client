@@ -7,6 +7,7 @@ var cjsx = require('gulp-cjsx');
 var plumber = require('gulp-plumber');
 var jade = require("gulp-jade")
 var del = require('del');
+var babel = require('gulp-babel');
 
 var paths = {
   coffee: ['./src/**/*.coffee'],
@@ -14,9 +15,17 @@ var paths = {
   less: ['./src/**/*.less'],
   stylus: ['./src/**/*.styl'],
   cjsx: ['./src/**/*.cjsx'],
+  es6: ['./src/**/*.js'],
 };
 
 gulp.task('clean', function(){});
+
+gulp.task('es6', ['clean'], function() {
+  return gulp.src(paths.es6)
+    .pipe(plumber())
+    .pipe(babel())
+    .pipe(gulp.dest('build'));
+});
 
 gulp.task('coffee', ['clean'], function() {
   return gulp.src(paths.coffee)
@@ -72,6 +81,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.less, ['less']);
   gulp.watch(paths.stylus, ['stylus']);
   gulp.watch(paths.cjsx, ['cjsx']);
+  gulp.watch(paths.es6, ['es6']);
 });
 
-gulp.task('default', ['watch', 'coffee', 'jade', 'main', 'less', 'cjsx', 'stylus']);
+gulp.task('default', ['watch', 'coffee', 'jade', 'main', 'less', 'cjsx', 'stylus', 'es6']);

@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/kkosuge/slack-like-twitter-client",
   "devDependencies": {
+    "babel": "^5.8.23",
     "del": "^1.2.1",
     "electron-prebuilt": "^0.30.5",
     "gulp": "^3.9.0",
@@ -38,6 +39,7 @@
     "gulp-plumber": "^1.0.1"
   },
   "dependencies": {
+    "gulp-babel": "^5.2.1",
     "gulp-jade": "^1.1.0",
     "gulp-stylus": "^2.0.6",
     "jade": "^1.11.0",
