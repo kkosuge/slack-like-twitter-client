@@ -19,11 +19,44 @@ export default class Timeline {
 
   pushTweet(tweet) {
     let el = document.createElement("div");
+    let images = [];
+    let text = _.escape(tweet.retweeted_status ? tweet.retweeted_status.text : tweet.text);
+
+    if (tweet.entities.media) {
+      tweet.entities.media.forEach((media) => {
+        if (media.type == 'photo') {
+          images.push({
+            html: `
+              <a onclick="Helper.openUrl('${media.url}')">
+                <img src="${media.media_url_https}" />
+              </a>`
+          });
+        }
+
+        text = text.replace(
+          media.url,
+          `<a onclick="Helper.openUrl('${media.url}')">${media.display_url}</a>`
+        );
+      });
+    }
+
+    if (tweet.entities.urls.length) {
+      tweet.entities.urls.forEach((entity) => {
+        text = text.replace(
+          entity.url,
+          `<a onclick="Helper.openUrl('${entity.url}')">${entity.display_url}</a>`
+        );
+      });
+    }
+
     el.innerHTML = this.template.render({
       user: tweet.user,
       retweeted_user: (tweet.retweeted_status && tweet.retweeted_status.user),
       tweet: (tweet.retweeted_status ? tweet.retweeted_status : tweet),
-      retweet: !!tweet.retweeted_status
+      retweet: !!tweet.retweeted_status,
+      text: text,
+      includeMedia: !!images.length,
+      images: images
     });
     this.node.appendChild(el);
   }
@@ -45,7 +78,14 @@ export default class Timeline {
             <div class="name">{{ user.name }}</div>
             <div class="screen-name">@{{ user.screen_name }}</div>
           </div>
-          <div class="text">{{ tweet.text }}</div>
+          <div class="text">{{{ text }}}</div>
+          {{#includeMedia}}
+            <div class="media">
+              {{#images}}
+                {{{html}}}
+              {{/images}}
+            </div>
+          {{/includeMedia}}
         </div>
       </div>
     `
@@ -54,7 +94,7 @@ export default class Timeline {
   getInitialTweets() {
     (async () => {
        let tweets = await this.client.get();
-       tweets.forEach((tweet) => {
+       tweets.reverse().forEach((tweet) => {
          this.pushTweet(tweet);
        });
     })();
