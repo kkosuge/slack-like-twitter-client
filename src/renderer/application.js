@@ -1,14 +1,15 @@
-import m from 'mithril'
-import Profile from './view/profile'
-import Tweets from './view/tweets'
-import TweetBox from './view/tweet_box'
-import Lists from './view/lists'
-import Header from './view/header'
-import Main from './view/main'
-import Timeline from './model/timeline'
-import Account from './model/account'
-import Authentication from './authentication'
 import './helper/helper'
+//import Profile from './view/profile'
+//import Tweets from './view/tweets'
+//import TweetBox from './view/tweet_box'
+//import Lists from './view/lists'
+//import Header from './view/header'
+//import Main from './view/main'
+import Timeline from './timeline/timeline'
+import Account from './model/account'
+import AccountComponent from './components/account'
+import TweetBox from './components/tweet_box'
+import Authentication from './authentication'
 
 class Application {
   constructor() {
@@ -32,20 +33,10 @@ class Application {
     global.accounts = accounts;
     document.getElementById("webview").remove();
 
-    m.mount(document.getElementById("profile"), {
-     view: (new Profile).view
-    });
-    m.mount(document.getElementById("lists"), {
-     view: (new Lists()).view
-    });
+    React.render(<AccountComponent user={ accounts[0].user }/>, document.getElementById('profile'));
+    React.render(<TweetBox />, document.getElementById('tweet-box'));
 
-    let main = new Main();
-    main.getInitialTimeline();
-    setTimeout( () => {
-      m.mount(document.getElementById("main-article"), {
-       view: main.view
-      });
-    }, 2000);
+    new Timeline();
   }
 }
 

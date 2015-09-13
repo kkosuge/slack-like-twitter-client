@@ -1,12 +1,12 @@
 shell = require('shell')
 require 'babel/polyfill'
-
 window.$ = require 'jquery'
 window.m = require 'mithril'
 window._ = require 'lodash'
 window.Velocity = require 'velocity'
 window.pp = (object) -> console.log JSON.stringify(object, null, 2)
-
+window.React = require 'react'
+window.Hogan = require 'hogan.js'
 
 module.exports = window.Helper =
   largeIcon: (user) =>
