@@ -5,7 +5,7 @@ import './helper/helper'
 //import Lists from './view/lists'
 //import Header from './view/header'
 //import Main from './view/main'
-import Timeline from './timeline/timeline'
+import HomeTimeline from './timeline/home_timeline'
 import Account from './model/account'
 import AccountComponent from './components/account'
 import TweetBox from './components/tweet_box'
@@ -36,7 +36,7 @@ class Application {
     React.render(<AccountComponent user={ accounts[0].user }/>, document.getElementById('profile'));
     React.render(<TweetBox />, document.getElementById('tweet-box'));
 
-    new Timeline();
+    new HomeTimeline();
   }
 }
 
