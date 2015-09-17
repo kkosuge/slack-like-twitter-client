@@ -10,7 +10,6 @@ global.twitter_credentials = {
 export default class Application {
   constructor() {
     global.application = this;
-
     app.on('window-all-closed', () => {});
     app.on('ready', this.onReady.bind(this));
   }

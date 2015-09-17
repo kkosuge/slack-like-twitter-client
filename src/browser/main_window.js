@@ -8,6 +8,7 @@ export default class MainWindow {
     });
 
     this.window.loadUrl(`file://${__dirname}/../index.html`);
+    this.window.openDevTools();
     this.window.on('closed', () => {
       window = null
     });
