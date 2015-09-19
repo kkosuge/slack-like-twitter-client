@@ -48,9 +48,15 @@ export default class Tweets {
       retweet: !!tweet.retweeted_status,
       text: text,
       includeMedia: !!images.length,
-      images: images
+      images: images,
+      created_at: this.isoTime(tweet.created_at)
     });
     this.node.appendChild(el);
+  }
+
+  isoTime(timeText) {
+    let date = new Date(timeText);
+    return date.toISOString();
   }
 
   template() {
@@ -79,7 +85,7 @@ export default class Tweets {
             </div>
           {{/includeMedia}}
         </div>
-        <div class="created-at">{{ tweet.created_at }}</div>
+        <time class="created-at" is="relative-time" datetime="{{ created_at }}"></time>
       </div>
     `
   }
