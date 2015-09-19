@@ -1,0 +1,40 @@
+.modal
+  position fixed
+  top 0
+  bottom 0
+  left 0
+  right 0
+  padding 40px
+  background #EA006F
+  color white
+  z-index 1
+  visibility hidden
+  opacity 0
+  pointer-events none
+  transition 200ms ease
+  overflow auto
+  &.show
+    opacity 1
+    visibility visible
+    pointer-events auto
+  &.image-modal
+    background #333
+    min-width 300px
+    left 50%
+    right auto
+    top 30%
+    bottom auto
+    box-shadow 0 0 0 3000px rgba(0,0,0,0.4)
+    -webkit-transform translateX(-50%)
+    transform translateX(-50%)
+  .modal-close-btn
+    display block
+    position absolute
+    top 0
+    right 0
+    padding 32px
+    opacity 0.8
+    cursor pointer
+    font-size 24px
+    padding 10px
+    padding-top 6px

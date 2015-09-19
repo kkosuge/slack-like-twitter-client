@@ -1,7 +1,7 @@
-import Tweets from './tweets'
+import TimelineTweets from './timeline_tweets'
 import HomeTimelineClient from '../twitter_client/home_timeline_client'
 
-export default class HomeTweets extends Tweets {
+export default class HomeTweets extends TimelineTweets {
   constructor(node) {
     super(node);
     this.client = new HomeTimelineClient();

@@ -1,4 +1,7 @@
-export default class Tweets {
+import Tweet from '../model/tweet'
+window.Tweet = Tweet;
+
+export default class TimelineTweets {
   constructor(node) {
     this.node = node;
     this.template = Hogan.compile(this.template());
@@ -12,6 +15,8 @@ export default class Tweets {
       return false;
     }
 
+    Tweet.push(tweet);
+
     let el = document.createElement("div");
     let images = [];
     let text = _.escape(tweet.retweeted_status ? tweet.retweeted_status.text : tweet.text);
@@ -20,10 +25,7 @@ export default class Tweets {
       tweet.entities.media.forEach((media) => {
         if (media.type == 'photo') {
           images.push({
-            html: `
-              <a onclick="Helper.openUrl('${media.url}')">
-                <img src="${media.media_url_https}" />
-              </a>`
+            html: `<img src="${media.media_url_https}" />`
           });
         }
 
@@ -63,7 +65,7 @@ export default class Tweets {
 
   template() {
     return `
-      <div class="tweet {{#retweet}}retweet{{/retweet}}">
+      <div class="tweet {{#retweet}}retweet{{/retweet}}" data-status-id="{{ tweet.id }}">
         <div class="profile-image">
           {{#retweet}}
             <img src="{{ retweeted_user.profile_image_url }}">

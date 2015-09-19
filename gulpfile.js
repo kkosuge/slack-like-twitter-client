@@ -8,6 +8,8 @@ var plumber = require('gulp-plumber');
 var jade = require("gulp-jade")
 var del = require('del');
 var babel = require('gulp-babel');
+var sass = require('gulp-sass');
+var sym = require('gulp-sym');
 
 var paths = {
   coffee: ['./src/**/*.coffee'],
@@ -16,6 +18,7 @@ var paths = {
   stylus: ['./src/**/*.styl'],
   cjsx: ['./src/**/*.cjsx'],
   es6: ['./src/**/*.js'],
+  sass: ['./src/**/*.scss'],
 };
 
 gulp.task('clean', function(){});
@@ -74,6 +77,17 @@ gulp.task('cjsx', ['clean'], function() {
     .pipe(gulp.dest('build'));
 });
 
+gulp.task('sass', function () {
+  gulp.src(paths.sass)
+    .pipe(sass({ includePaths: ['node_modules'] }).on('error', sass.logError))
+    .pipe(gulp.dest('build'));
+});
+
+gulp.task('fonts', function () {
+  gulp.src('node_modules/font-awesome/fonts')
+    .pipe(sym('build/renderer/fonts', { force: true }));
+});
+
 gulp.task('watch', function() {
   gulp.watch('./main.coffee', ['main']);
   gulp.watch(paths.coffee, ['coffee']);
@@ -82,6 +96,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.stylus, ['stylus']);
   gulp.watch(paths.cjsx, ['cjsx']);
   gulp.watch(paths.es6, ['es6']);
+  gulp.watch(paths.sass, ['sass']);
 });
 
-gulp.task('default', ['watch', 'coffee', 'jade', 'main', 'less', 'cjsx', 'stylus', 'es6']);
+gulp.task('default', ['watch', 'coffee', 'jade', 'main', 'less', 'cjsx', 'stylus', 'es6', 'sass', 'fonts']);

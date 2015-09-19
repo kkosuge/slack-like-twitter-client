@@ -1,7 +1,7 @@
 import ListClient from '../twitter_client/list_client'
-import Tweets from './tweets'
+import TimelineTweets from './timeline_tweets'
 
-export default class ListTweets extends Tweets {
+export default class ListTweets extends TimelineTweets {
   constructor(node, listId) {
     super(node);
     this.client = new ListClient();
