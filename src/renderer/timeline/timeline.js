@@ -5,6 +5,7 @@ class Timeline {
   constructor() {
     this.tweets = {};
     this.windows = {};
+    this.currentWindowId = '';
   }
 
   showHomeTimeline() {
@@ -29,6 +30,9 @@ class Timeline {
     this.switchTimeline(id);
   }
 
+  currentWindow() {
+    return this.windows[this.currentWindowId];
+  }
 
   createElement(id) {
     let el = document.createElement("div");
@@ -39,12 +43,26 @@ class Timeline {
   }
 
   switchTimeline(id) {
+    let nextWindow = this.windows[id];
+    let el = document.getElementById('tweets');
+    if (this.currentWindow()) {
+      this.currentWindow().scrollTop = el.scrollTop;
+    }
+
     let tweets = document.getElementsByClassName('tweets');
     Array.prototype.forEach.call(tweets, (node) =>{
       node.style.display = 'none';
     });
+
     let tl = document.querySelector(`div[data-timeline-id="${id}"]`);
     tl.style.display = '';
+
+    if (nextWindow.scrollTop) {
+      el.scrollTop = nextWindow.scrollTop;
+    } else {
+      el.scrollTop = el.scrollHeight;
+    }
+    this.currentWindowId = id;
   }
 }
 

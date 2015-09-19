@@ -3,6 +3,8 @@ export default class Tweets {
     this.node = node;
     this.template = Hogan.compile(this.template());
     this.statusIds = [];
+    this.scrollTop = 0;
+    this.autoScroll = false;
   }
 
   pushTweet(tweet) {
