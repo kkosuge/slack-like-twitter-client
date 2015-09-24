@@ -7,13 +7,13 @@ export default class ListTweets extends TimelineTweets {
     this.client = new ListClient();
     this.listId = listId;
     this.update();
-    this.intervalId = setInterval(this.update, 1000*60);
   }
 
   update() {
     (async () => {
        let params = { listId: this.listId };
        let tweets = await this.client.get(params);
+       info(`ListTweets#update#${this.listId}`)
        tweets.reverse().forEach((tweet) => {
          this.pushTweet(tweet);
        });

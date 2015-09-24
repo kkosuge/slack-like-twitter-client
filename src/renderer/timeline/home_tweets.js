@@ -7,6 +7,15 @@ export default class HomeTweets extends TimelineTweets {
     this.client = new HomeTimelineClient();
     this.update();
     this.runStream();
-    this.intervalId = setInterval(this.update, 1000*60);
+  }
+
+  update() {
+    (async () => {
+       let tweets = await this.client.get();
+       info("HomeTweets#update")
+       tweets.reverse().forEach((tweet) => {
+         this.pushTweet(tweet);
+       });
+    })();
   }
 }

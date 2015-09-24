@@ -6,6 +6,15 @@ class Timeline {
     this.tweets = {};
     this.windows = {};
     this.currentWindowId = '';
+    this.updateIntervalId = setInterval(this.updateAll.bind(this), 1000*60);
+  }
+
+  updateAll() {
+    let windowIds = Object.keys(this.windows);
+    windowIds.forEach((windowId) => {
+      let window = this.windows[windowId];
+      window.update();
+    });
   }
 
   showHomeTimeline() {

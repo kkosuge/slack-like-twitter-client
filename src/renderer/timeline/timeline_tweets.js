@@ -94,15 +94,6 @@ export default class TimelineTweets {
     `
   }
 
-  update() {
-    (async () => {
-       let tweets = await this.client.get();
-       tweets.reverse().forEach((tweet) => {
-         this.pushTweet(tweet);
-       });
-    })();
-  }
-
   runStream() {
     this.client.getTwitter().stream('user', (stream) => {
       stream.on('data', (data) => {
