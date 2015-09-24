@@ -9,6 +9,10 @@ export default class TweetBox extends React.Component {
     };
   }
 
+  componentDidMount() {
+    autosize(React.findDOMNode(this.refs.textarea));
+  }
+
   changeText(e) {
     let text = React.findDOMNode(this.refs.textarea).value
     this.setState({ text: text });
@@ -26,7 +30,7 @@ export default class TweetBox extends React.Component {
   render() {
     return(
       <div className="tweet-form ui form">
-        <textarea rows="3"
+        <textarea rows="1"
           ref="textarea"
           defaultValue={ this.state.text }
           onChange={ this.changeText.bind(this) }
