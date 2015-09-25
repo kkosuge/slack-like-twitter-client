@@ -4,7 +4,7 @@ export default class MainWindow {
   constructor() {
     this.window = new BrowserWindow({
       width: 1200,
-      height: 900
+      height: 900,
     });
 
     this.window.loadUrl(`file://${__dirname}/../index.html`);

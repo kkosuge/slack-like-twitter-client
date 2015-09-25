@@ -13,7 +13,8 @@
   .contents
     flex 1
     margin-left 10px
-  .name-contents
+
+  .contents-header
     display flex
     .name
       font-weight bold
@@ -28,7 +29,15 @@
     img
       height 100%
 
-  &.retweet
+  .contents-footer
+    position relative
+    .favorite
+      cursor pointer
+      color #DADADA
+      &.favorited
+        color #ffac33
+
+   &.retweet
     .retweet-user
       position absolute
       right -4px

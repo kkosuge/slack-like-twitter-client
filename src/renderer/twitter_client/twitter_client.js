@@ -46,4 +46,29 @@ export default class TwitterClient {
       )
     });
   }
+
+  favorite(statusId) {
+    console.log(statusId);
+    return new Promise((resolve, reject) => {
+      this.client.post(
+        'favorites/create',
+        { id: statusId },
+        (error, tweet, response) => {
+          resolve({ response: response, tweet: tweet });
+        }
+      );
+    });
+  }
+
+  unfavorite(statusId) {
+    return new Promise((resolve, reject) => {
+      this.client.post(
+        'favorites/destroy',
+        { id: statusId },
+        (error, tweet, response) => {
+          resolve({ response: response, tweet: tweet });
+        }
+      );
+    });
+  }
 }

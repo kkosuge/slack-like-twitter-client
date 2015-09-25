@@ -6,7 +6,7 @@ class Timeline {
     this.tweets = {};
     this.windows = {};
     this.currentWindowId = '';
-    this.updateIntervalId = setInterval(this.updateAll.bind(this), 1000*60);
+    this.updateIntervalId = setInterval(this.updateAll.bind(this), 1000*60*2);
   }
 
   updateAll() {

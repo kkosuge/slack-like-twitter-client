@@ -33,4 +33,10 @@ module.exports = window.Helper =
     else
       setTimeout(@scrollToBottom, 100)
 
-
+  findElementFromPathByClass: (path, className) =>
+    element = path.find (el) =>
+      if el.classList.length
+        return el.classList.contains(className)
+      else
+        return false
+    return element

@@ -23,6 +23,14 @@ var paths = {
 
 gulp.task('clean', function(){});
 
+gulp.task('images', function() {
+  return gulp.src(
+    [ './src/renderer/images/**' ],
+    { base: 'src' }
+  )
+  .pipe( gulp.dest( 'build' ) );
+});
+
 gulp.task('es6', ['clean'], function() {
   return gulp.src(paths.es6)
     .pipe(plumber())
@@ -99,4 +107,4 @@ gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
 });
 
-gulp.task('default', ['watch', 'coffee', 'jade', 'main', 'less', 'cjsx', 'stylus', 'es6', 'sass', 'fonts']);
+gulp.task('default', ['watch', 'coffee', 'jade', 'main', 'less', 'cjsx', 'stylus', 'es6', 'sass', 'fonts', 'images']);
