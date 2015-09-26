@@ -62,11 +62,15 @@ export default class TimelineTweets {
 
     let tweets = document.getElementById('tweets');
     let prevScrollMinusTop = tweets.scrollHeight - tweets.scrollTop;
-    //el.style.display = 'none';
+
+    el.style.opacity = 0;
     let firstChild = this.node.firstChild;
     this.node.insertBefore(el, firstChild);
-    //Velocity(el, { opacity: 1 }, { duration: 500, display: 'block'});
-    tweets.scrollTop = tweets.scrollHeight - prevScrollMinusTop;
+    Velocity(el, { opacity: 1 }, { duration: 600 });
+
+    if (tweets.scrollTop > 0) {
+      tweets.scrollTop = tweets.scrollHeight - prevScrollMinusTop;
+    }
 
     this.statusIds.push(tweet.id);
   }
