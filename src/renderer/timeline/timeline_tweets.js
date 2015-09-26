@@ -60,7 +60,14 @@ export default class TimelineTweets {
 
     //el.querySelector('.js-add-favorite').addEventListener('click', this.toggleFavorite.bind(this))
 
-    this.node.appendChild(el);
+    let tweets = document.getElementById('tweets');
+    let prevScrollMinusTop = tweets.scrollHeight - tweets.scrollTop;
+    //el.style.display = 'none';
+    let firstChild = this.node.firstChild;
+    this.node.insertBefore(el, firstChild);
+    //Velocity(el, { opacity: 1 }, { duration: 500, display: 'block'});
+    tweets.scrollTop = tweets.scrollHeight - prevScrollMinusTop;
+
     this.statusIds.push(tweet.id);
   }
 
