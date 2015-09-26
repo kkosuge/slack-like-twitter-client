@@ -29,7 +29,7 @@ class Application {
     document.getElementById("webview").remove();
 
     React.render(<AccountComponent user={ accounts[0].user }/>, document.getElementById('profile'));
-    React.render(<TweetBox />, document.getElementById('tweet-box'));
+    React.render(<TweetBox user={ accounts[0].user }/>, document.getElementById('tweet-box'));
     React.render(<Lists />, document.getElementById('lists'));
 
     Timeline.showHomeTimeline();

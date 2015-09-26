@@ -1,7 +1,8 @@
 .tweet
   display flex
-  margin 10px 0
-  margin-bottom 16px
+  margin 5px 0
+  border-bottom 1px solid #F1F1F1
+  padding 5px 0
 
   .profile-image
     position relative
@@ -19,10 +20,17 @@
     .name
       font-weight bold
     .screen-name
+      font-size 13px
+      color #8899a6
       margin-left 4px
+      i
+        margin-right 1px
+      b
+        font-weight normal
   .created-at
     margin-left 4px
     color #9C9C9C
+    font-size 12px
   .media
     height 200px
     margin-top 12px
@@ -31,10 +39,22 @@
 
   .contents-footer
     position relative
-    .favorite
+    color #DADADA
+    display flex
+    .action
       cursor pointer
-      color #DADADA
-      &.favorited
+      margin 4px 12px
+      margin-bottom 0
+      font-size 14px
+    .reply
+      margin-left 0
+      &:hover
+        color #087FFF
+    .retweet
+      &:hover
+        color #5c913b
+    .favorite
+      &:hover, &.favorited
         color #ffac33
 
    &.retweet

@@ -1,3 +1,6 @@
+body
+  font-family "RobotoDraft", "Roboto", sans-serif, "Open Sans", "Helvetica Neue", Helvetica, "Arial", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif
+
 ::selection
   background #00acee
   color #FFF
@@ -14,12 +17,17 @@ a
 #root
   height 100%
 
+#title-bar
+  height 38px
+  border-bottom 1px solid #EEE
+
 .container
   display flex
   height 100%
 
 
 #main-article
+  box-shadow 0 2px 5px rgba(0,0,0,0.26)
   flex 1
   display flex
   flex-direction column
@@ -29,7 +37,7 @@ a
   #tweets
     overflow-y scroll
     margin-top 34px
-    margin-bottom 112px
+    margin-bottom 52px
 
   #tweet-box
     position absolute
@@ -39,11 +47,6 @@ a
 
   .tweet-form
     margin 8px
-
-  .tweet-panel
-    text-align right
-    background-color #EEE
-    padding 6px
 
 .tweets
   padding 0 1rem

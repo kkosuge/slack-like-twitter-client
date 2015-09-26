@@ -58,7 +58,7 @@ export default class TimelineTweets {
       created_at: this.isoTime(tweet.created_at)
     });
 
-    el.querySelector('.js-add-favorite').addEventListener('click', this.toggleFavorite.bind(this))
+    //el.querySelector('.js-add-favorite').addEventListener('click', this.toggleFavorite.bind(this))
 
     this.node.appendChild(el);
     this.statusIds.push(tweet.id);
@@ -100,7 +100,9 @@ export default class TimelineTweets {
         <div class="contents">
           <div class="contents-header">
             <div class="name">{{ user.name }}</div>
-            <div class="screen-name">@{{ user.screen_name }}</div>
+            <div class="screen-name">
+              <i class="fa fa-at"></i><b>{{ user.screen_name }}</b>
+            </div>
           </div>
           <div class="text">{{{ text }}}</div>
           {{#includeMedia}}
@@ -112,12 +114,20 @@ export default class TimelineTweets {
           {{/includeMedia}}
 
           <div class="contents-footer">
-            <div class="favorite js-add-favorite{{#tweet.favorited}} favorited{{/tweet.favorited}}">
+            <div class="action reply">
+              <i class="fa fa-reply"></i>
+            </div>
+
+            <div class="action retweet">
+              <i class="fa fa-retweet"></i>
+            </div>
+
+            <div class="action favorite js-add-favorite{{#tweet.favorited}} favorited{{/tweet.favorited}}">
               <i class="fa fa-star"></i>
             </div>
           </div>
-
         </div>
+
         <time class="created-at" is="relative-time" datetime="{{ created_at }}"></time>
       </div>
     `

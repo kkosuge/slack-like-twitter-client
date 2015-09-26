@@ -30,7 +30,8 @@ export default class Lists extends React.Component {
       return(
         <div key={ `list-${list.id}` }>
           <li onClick={ this.showList.bind(this, list) }>
-            <p>{ `@${list.user.screen_name}/${list.name}` }</p>
+            <i className="fa fa-list"></i>
+            { `${list.user.screen_name}/${list.name}` }
           </li>
         </div>
       );
@@ -38,17 +39,11 @@ export default class Lists extends React.Component {
 
     return(
       <div>
-        <h3>HOME</h3>
         <div className="channel-list">
           <ul>
-            <li onClick={ this.showHomeTimeline }>
-              <p>TIMELINE</p>
+            <li className="active" onClick={ this.showHomeTimeline }>
+              <i className="fa fa-home"></i> HOME TIMELINE
             </li>
-          </ul>
-        </div>
-        <h3>LIST</h3>
-        <div className="channel-list">
-          <ul>
             { lists }
           </ul>
         </div>

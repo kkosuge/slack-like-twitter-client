@@ -1,6 +1,7 @@
 doctype html
 html
   head
+    meta(charset="UTF-8")
     title Slack Like Twitter Client
     link(href="./renderer/stylesheets/vender.css" rel="stylesheet" type="text/css")
     link(href="./renderer/stylesheets/application.css" rel="stylesheet" type="text/css")
@@ -15,6 +16,7 @@ html
     #root
       .container
         .side-menu
+          #title-bar
           #profile
           #lists
         #main-article
@@ -22,6 +24,6 @@ html
           #header
             h1 HOME TIMELINE
             .ui.icon.input
-              input( type="text" placeholder="Search..." )
+              input( type="text" placeholder="Filter..." )
               i.search.icon
           #tweet-box

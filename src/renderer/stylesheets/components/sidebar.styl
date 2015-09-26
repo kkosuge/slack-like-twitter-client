@@ -1,18 +1,20 @@
 .side-menu
   width 220px
-  background-color #3e313c
-  color #FFF
+  background-color #FFF
+  color #333
 
   .user
     display flex
-    height 32px
     padding-left 16px
-    margin-top 16px
+    margin-top 8px
+    padding-bottom 8px
+    border-bottom 1px solid #EEE
 
     .profile-image
-      img 
+      img
         width 32px
-    .screen-name 
+        border-radius 4px
+    .screen-name
       margin-left 10px
       font-size 1.125rem
       line-height 32px
@@ -25,7 +27,7 @@
     margin-bottom 10px
     text-transform uppercase
     font-weight 700
-    color #ab9ba9
+    //color #ab9ba9
 
   .channel-list
     ul
@@ -36,27 +38,24 @@
         margin-right 16px
         border-radius 0 4px 4px 0
         padding-left 16px
-        color #ab9ba9
-        font-size 1rem
-        line-height 1.5rem
-        height 1.5rem
+        padding 6px 16px
         position relative
-        text-shadow 0 1px 1px rgba(0,0,0,.25)
         cursor pointer
-        &.active
-          background #4c9689
-          color #FFF
-          a
-            color #FFF
-        &:hover
-          background-color #4c9689
-          color #FFF
         .prefix
           font-weight 300
           opacity .5
           margin-right 2px
         a
-          color #ab9ba9
+          color #00bcd4
           display block
-
-
+        i
+          margin-right 4px
+          font-size .9em
+          color #7B7B7B
+        &:hover
+          background-color #EEE
+          color #00bcd4
+        &.active
+          color #00bcd4
+          a
+            color #00bcd4
