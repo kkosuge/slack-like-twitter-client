@@ -27,10 +27,13 @@
         margin-right 1px
       b
         font-weight normal
-  .created-at
-    margin-left 4px
-    color #9C9C9C
-    font-size 12px
+    .created-at
+      margin-left auto
+      color #DADADA
+      font-size 12px
+      cursor pointer
+      a
+        color #DADADA
   .media
     height 200px
     margin-top 12px
@@ -56,6 +59,14 @@
     .favorite
       &:hover, &.favorited
         color #ffac33
+    .source
+      font-size 12px
+      margin-top 4px
+      margin-left auto
+      a
+        color #DADADA
+        &:before
+          content: 'via '
 
    &.retweet
     .retweet-user

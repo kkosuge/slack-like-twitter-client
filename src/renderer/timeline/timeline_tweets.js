@@ -33,7 +33,7 @@ export default class TimelineTweets {
 
         text = text.replace(
           media.url,
-          `<a onclick="Helper.openUrl('${media.url}')">${media.display_url}</a>`
+          `<a href="${media.url}" target="_blank">${media.display_url}</a>`
         );
       });
     }
@@ -42,7 +42,7 @@ export default class TimelineTweets {
       tweet.entities.urls.forEach((entity) => {
         text = text.replace(
           entity.url,
-          `<a onclick="Helper.openUrl('${entity.url}')">${entity.display_url}</a>`
+          `<a href="${entity.url}" target="_blank">${entity.display_url}</a>`
         );
       });
     }
@@ -55,7 +55,8 @@ export default class TimelineTweets {
       text: text,
       includeMedia: !!images.length,
       images: images,
-      created_at: this.isoTime(tweet.created_at)
+      created_at: this.isoTime(tweet.created_at),
+      statusUrl: `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
     });
 
     //el.querySelector('.js-add-favorite').addEventListener('click', this.toggleFavorite.bind(this))
@@ -108,14 +109,22 @@ export default class TimelineTweets {
             <img src="{{ user.profile_image_url }}">
           {{/retweet}}
         </div>
+
         <div class="contents">
           <div class="contents-header">
             <div class="name">{{ user.name }}</div>
             <div class="screen-name">
               <i class="fa fa-at"></i><b>{{ user.screen_name }}</b>
             </div>
+            <div class="created-at">
+              <a href="{{ statusUrl }}" target="_blank">
+                <time is="relative-time" datetime="{{ created_at }}"></time>
+              </a>
+            </div>
           </div>
+
           <div class="text">{{{ text }}}</div>
+
           {{#includeMedia}}
             <div class="media">
               {{#images}}
@@ -128,18 +137,18 @@ export default class TimelineTweets {
             <div class="action reply">
               <i class="fa fa-reply"></i>
             </div>
-
             <div class="action retweet">
               <i class="fa fa-retweet"></i>
             </div>
-
             <div class="action favorite js-add-favorite{{#tweet.favorited}} favorited{{/tweet.favorited}}">
               <i class="fa fa-star"></i>
+            </div>
+            <div class="source">
+              {{{ tweet.source }}}
             </div>
           </div>
         </div>
 
-        <time class="created-at" is="relative-time" datetime="{{ created_at }}"></time>
       </div>
     `
   }

@@ -40,3 +40,8 @@ module.exports = window.Helper =
       else
         return false
     return element
+
+$(document).on 'click', 'a', ->
+  if /^https?/.test(this.href)
+    Helper.openUrl(this.href)
+    return false
