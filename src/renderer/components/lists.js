@@ -27,15 +27,27 @@ export default class Lists extends React.Component {
     Timeline.showList(list);
   }
 
+  showMentions() {
+    Timeline.showMentions();
+  }
+
   render() {
     let currentWindowId = Timeline.currentWindowId;
-    let homeClassName;
+    let homeClassName, mentionsClassName;
     let homeIsActive = currentWindowId === 'hometimeline';
+    let mentionsIsActive = currentWindowId === 'mentions';
+    let mentionsIsEnabled = !!this.state.windows['mentions'];
 
     if (homeIsActive) {
       homeClassName = 'active';
     } else {
       homeClassName = 'enabled';
+    }
+
+    if (mentionsIsActive) {
+      mentionsClassName = 'active';
+    } else if (mentionsIsEnabled) {
+      mentionsClassName = 'enabled';
     }
 
     let lists = this.state.lists.map((list) => {
@@ -57,7 +69,7 @@ export default class Lists extends React.Component {
             className={ className }
           >
             <i className="fa fa-list"></i>
-            { `${list.user.screen_name}/${list.name}` }
+            { `${list.name}` }
           </li>
         </div>
       );
@@ -69,6 +81,9 @@ export default class Lists extends React.Component {
           <ul>
             <li className={ homeClassName } onClick={ this.showHomeTimeline }>
               <i className="fa fa-home"></i> HOME TIMELINE
+            </li>
+            <li className={ mentionsClassName } onClick={ this.showMentions }>
+              <i className="fa fa-at"></i> MENTIONS
             </li>
             { lists }
           </ul>

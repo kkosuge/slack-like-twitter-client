@@ -1,5 +1,6 @@
 import HomeTweets from './home_tweets'
 import ListTweets from './list_tweets'
+import MentionTweets from './mention_tweets'
 
 class Timeline {
   constructor() {
@@ -48,6 +49,18 @@ class Timeline {
     }
 
     this.currentWindowName = `${list.user.screen_name} / ${list.name}`;
+    this.switchTimeline(id);
+  }
+
+  showMentions() {
+    let id = "mentions";
+
+    if (!this.windows[id]) {
+      let el = this.createElement(id);
+      this.windows[id] = new MentionTweets(el);
+    }
+
+    this.currentWindowName = "MENTIONS";
     this.switchTimeline(id);
   }
 

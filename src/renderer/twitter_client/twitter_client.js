@@ -13,6 +13,18 @@ export default class TwitterClient {
    return this.client;
   }
 
+  getMentions() {
+    return new Promise((resolve, reject) => {
+      this.client.get(
+        'statuses/mentions_timeline',
+        { count: 50 },
+        (error, tweets, response) => {
+          resolve(tweets);
+        }
+      )
+    });
+  }
+
   postTweet(text) {
     return new Promise((resolve, reject) => {
       this.client.post(
