@@ -4,16 +4,12 @@ import Timeline from '../timeline/timeline'
 export default class Lists extends React.Component {
   constructor(props) {
     super(props);
+
     this.client = new TwitterClient();
     this.state = {
       lists: [],
-      windows: Timeline.windows
+      windows: this.props.windows
     };
-    emitter.on('refresh', () => {
-      this.setState({
-        windows: Timeline.windows
-      });
-    });
   }
 
   componentDidMount() {
@@ -28,7 +24,7 @@ export default class Lists extends React.Component {
   }
 
   showList(list) {
-    Timeline.showList(list.id);
+    Timeline.showList(list);
   }
 
   render() {

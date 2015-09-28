@@ -5,6 +5,8 @@ import Account from './model/account'
 import AccountComponent from './components/account'
 import TweetBox from './components/tweet_box'
 import Lists from './components/lists'
+import ArticleHeader from './components/article_header'
+import Root from './components/root'
 import Authentication from './authentication'
 
 class Application {
@@ -29,9 +31,12 @@ class Application {
     global.accounts = accounts;
     document.getElementById("webview").remove();
 
-    React.render(<AccountComponent user={ accounts[0].user }/>, document.getElementById('profile'));
-    React.render(<TweetBox user={ accounts[0].user }/>, document.getElementById('tweet-box'));
-    React.render(<Lists />, document.getElementById('lists'));
+    React.render(
+      <Root
+        user={ accounts[0].user }
+      />
+    , document.getElementById('root')
+    );
 
     Timeline.showHomeTimeline();
   }
@@ -39,11 +44,4 @@ class Application {
 
 window.onload = () => {
   new Application();
-
-  let ob = new MutationObserver( (mutations) => {
-    Helper.scrollToBottom();
-  });
-
-  let config = { attributes: true, childList: true, characterData: true };
-  ob.observe(document.getElementById('main-article'), config);
 }

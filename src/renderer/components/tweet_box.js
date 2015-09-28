@@ -40,22 +40,24 @@ export default class TweetBox extends React.Component {
 
   render() {
     return(
-      <div className="tweet-form ui form">
-        <div className="account">
-          <img src={ this.props.user.profile_image_url } />
-        </div>
-        <div className="form-box">
-          <textarea rows="1"
-            ref="textarea"
-            defaultValue={ this.state.text }
-            onChange={ this.changeText.bind(this) }
-            placeholder="What's happening?"
-          />
-          <div
-            className="tweet-panel"
-            ref="tweetPanel"
-          >
-            <button className="ui mini twitter button" onClick={ this.post.bind(this) }>POST</button>
+      <div id="tweet-box">
+        <div className="tweet-form ui form">
+          <div className="account">
+            <img src={ this.props.user.profile_image_url } />
+          </div>
+          <div className="form-box">
+            <textarea rows="1"
+              ref="textarea"
+              defaultValue={ this.state.text }
+              onChange={ this.changeText.bind(this) }
+              placeholder="What's happening?"
+            />
+            <div
+              className="tweet-panel"
+              ref="tweetPanel"
+            >
+              <button className="ui mini twitter button" onClick={ this.post.bind(this) }>POST</button>
+            </div>
           </div>
         </div>
       </div>

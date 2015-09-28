@@ -5,6 +5,7 @@ class Timeline {
   constructor() {
     this.tweets = {};
     this.windows = {};
+    this.currentWindowName = "HOME TIMELINE";
     this.currentWindowId = '';
     this.updateIntervalId = setInterval(this.updateAll.bind(this), 1000*60*2);
     this.gcIntervalId = setInterval(this.gcAll.bind(this), 1000*60*15);
@@ -34,17 +35,19 @@ class Timeline {
       this.windows[id] = new HomeTweets(el);
     }
 
+    this.currentWindowName = "HOME TIMELINE";
     this.switchTimeline(id);
   }
 
-  showList(listId) {
-    let id = `list-${listId}`;
+  showList(list) {
+    let id = `list-${list.id_str}`;
 
     if (!this.windows[id]) {
       let el = this.createElement(id);
-      this.windows[id] = new ListTweets(el, listId);
+      this.windows[id] = new ListTweets(el, list.id_str);
     }
 
+    this.currentWindowName = `${list.user.screen_name} / ${list.name}`;
     this.switchTimeline(id);
   }
 
