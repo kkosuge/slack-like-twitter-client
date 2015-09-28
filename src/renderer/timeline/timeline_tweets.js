@@ -12,8 +12,26 @@ export default class TimelineTweets {
     this.client = new TwitterClient();
   }
 
+  gc() {
+    const MAX_TWEETS_COUNT = 1000;
+    let statusIds = this.statusIds.sort();
+    let popCount = statusIds.length - MAX_TWEETS_COUNT;
+
+    if (popCount > 0) {
+      _.times(popCount, () => {
+        let id = statusIds.shift();
+        this.node.querySelector(`div[data-status-id="${id}"]`).remove();
+      });
+
+      this.statusIds = statusIds;
+
+      let tlId = this.node.dataset['timelineId'];
+      info(`TimelineTweets(${tlId})gc(${popCount})`);
+    }
+  }
+
   pushTweet(tweet) {
-    if (_.includes(this.statusIds, tweet.id)) {
+    if (_.includes(this.statusIds, tweet.id_str)) {
       return false;
     }
 
@@ -48,6 +66,7 @@ export default class TimelineTweets {
     }
 
     el.innerHTML = this.template.render({
+      id: tweet.id_str,
       user: tweet.user,
       retweeted_user: (tweet.retweeted_status && tweet.retweeted_status.user),
       tweet: (tweet.retweeted_status ? tweet.retweeted_status : tweet),
@@ -73,7 +92,7 @@ export default class TimelineTweets {
       tweets.scrollTop = tweets.scrollHeight - prevScrollMinusTop;
     }
 
-    this.statusIds.push(tweet.id);
+    this.statusIds.push(tweet.id_str);
   }
 
   toggleFavorite(e) {
@@ -99,7 +118,7 @@ export default class TimelineTweets {
 
   template() {
     return `
-      <div class="tweet {{#retweet}}retweet{{/retweet}}" data-status-id="{{ tweet.id_str }}">
+      <div class="tweet {{#retweet}}retweet{{/retweet}}" data-status-id="{{ id }}">
         <div class="profile-image">
           {{#retweet}}
             <img src="{{ retweeted_user.profile_image_url }}">

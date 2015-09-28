@@ -7,6 +7,7 @@ class Timeline {
     this.windows = {};
     this.currentWindowId = '';
     this.updateIntervalId = setInterval(this.updateAll.bind(this), 1000*60*2);
+    this.gcIntervalId = setInterval(this.gcAll.bind(this), 1000*60*15);
   }
 
   updateAll() {
@@ -14,6 +15,14 @@ class Timeline {
     windowIds.forEach((windowId) => {
       let window = this.windows[windowId];
       window.update();
+    });
+  }
+
+  gcAll() {
+    let windowIds = Object.keys(this.windows);
+    windowIds.forEach((windowId) => {
+      let window = this.windows[windowId];
+      window.gc();
     });
   }
 

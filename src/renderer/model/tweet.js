@@ -4,7 +4,7 @@ class Tweets {
   }
 
   push(tweet) {
-    this.tweets[tweet.id] = tweet;
+    this.tweets[tweet.id_str] = tweet;
   }
 
   find(statusId) {
