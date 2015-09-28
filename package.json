@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "cta": "^0.3.1",
+    "eventemitter2": "^0.4.14",
     "font-awesome": "^4.4.0",
     "gulp-babel": "^5.2.1",
     "gulp-jade": "^1.1.0",

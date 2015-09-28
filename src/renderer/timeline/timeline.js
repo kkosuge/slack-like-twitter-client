@@ -81,6 +81,7 @@ class Timeline {
       el.scrollTop = el.scrollHeight;
     }
     this.currentWindowId = id;
+    emitter.emit('refresh');
   }
 }
 

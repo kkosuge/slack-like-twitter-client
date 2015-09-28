@@ -6,8 +6,14 @@ export default class Lists extends React.Component {
     super(props);
     this.client = new TwitterClient();
     this.state = {
-      lists: []
+      lists: [],
+      windows: Timeline.windows
     };
+    emitter.on('refresh', () => {
+      this.setState({
+        windows: Timeline.windows
+      });
+    });
   }
 
   componentDidMount() {
@@ -26,10 +32,34 @@ export default class Lists extends React.Component {
   }
 
   render() {
+    let currentWindowId = Timeline.currentWindowId;
+    let homeClassName;
+    let homeIsActive = currentWindowId === 'hometimeline';
+
+    if (homeIsActive) {
+      homeClassName = 'active';
+    } else {
+      homeClassName = 'enabled';
+    }
+
     let lists = this.state.lists.map((list) => {
+      let className;
+      let id = `list-${list.id}`;
+      let enabled = !!this.state.windows[id];
+      let active = (id === currentWindowId);
+
+      if (active) {
+        className = 'active';
+      } else if (enabled) {
+        className = 'enabled';
+      }
+
       return(
         <div key={ `list-${list.id}` }>
-          <li onClick={ this.showList.bind(this, list) }>
+          <li
+            onClick={ this.showList.bind(this, list) }
+            className={ className }
+          >
             <i className="fa fa-list"></i>
             { `${list.user.screen_name}/${list.name}` }
           </li>
@@ -41,7 +71,7 @@ export default class Lists extends React.Component {
       <div>
         <div className="channel-list">
           <ul>
-            <li className="active" onClick={ this.showHomeTimeline }>
+            <li className={ homeClassName } onClick={ this.showHomeTimeline }>
               <i className="fa fa-home"></i> HOME TIMELINE
             </li>
             { lists }

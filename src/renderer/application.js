@@ -1,4 +1,5 @@
-import './helper/helper'
+import './global/helper'
+import './global/emitter'
 import Timeline from './timeline/timeline'
 import Account from './model/account'
 import AccountComponent from './components/account'
