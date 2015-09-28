@@ -66,8 +66,10 @@ class Timeline {
   switchTimeline(id) {
     let nextWindow = this.windows[id];
     let el = document.getElementById('tweets');
+
     if (this.currentWindow()) {
       this.currentWindow().scrollTop = el.scrollTop;
+      this.currentWindow().scrollBottom = el.scrollHeight - el.scrollTop;
     }
 
     let tweets = document.getElementsByClassName('tweets');
@@ -79,10 +81,13 @@ class Timeline {
     tl.style.display = '';
 
     if (nextWindow.scrollTop) {
-      el.scrollTop = nextWindow.scrollTop;
+      el.scrollTop = el.scrollHeight - nextWindow.scrollBottom;
+    } else if (nextWindow.scrollTop === 0) {
+      el.scrollTop = 0;
     } else {
       el.scrollTop = el.scrollHeight;
     }
+
     this.currentWindowId = id;
     emitter.emit('refresh');
   }

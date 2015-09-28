@@ -8,6 +8,7 @@ export default class TimelineTweets {
     this.template = Hogan.compile(this.template());
     this.statusIds = [];
     this.scrollTop = 0;
+    this.scrollBottom = 0;
     this.autoScroll = false;
     this.client = new TwitterClient();
   }
