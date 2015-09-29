@@ -14,7 +14,7 @@ export default class TimelineTweets {
   }
 
   gc() {
-    const MAX_TWEETS_COUNT = 1000;
+    const MAX_TWEETS_COUNT = 500;
     let statusIds = this.statusIds.sort();
     let popCount = statusIds.length - MAX_TWEETS_COUNT;
 
@@ -70,6 +70,7 @@ export default class TimelineTweets {
       id: tweet.id_str,
       user: tweet.user,
       retweeted_user: (tweet.retweeted_status && tweet.retweeted_status.user),
+      original_user: (tweet.retweeted_status ? tweet.retweeted_status.user : tweet.user),
       tweet: (tweet.retweeted_status ? tweet.retweeted_status : tweet),
       retweet: !!tweet.retweeted_status,
       text: text,
@@ -132,10 +133,13 @@ export default class TimelineTweets {
 
         <div class="contents">
           <div class="contents-header">
-            <div class="name">{{ user.name }}</div>
+            <div class="name">{{ original_user.name }}</div>
             <div class="screen-name">
-              <i class="fa fa-at"></i><b>{{ user.screen_name }}</b>
+              <i class="fa fa-at"></i><b>{{ original_user.screen_name }}</b>
             </div>
+            {{#original_user.protected}}
+              <div class="protected"><i class="fa fa-lock"></i></div>
+            {{/original_user.protected}}
             <div class="created-at">
               <a href="{{ statusUrl }}" target="_blank">
                 <time is="relative-time" datetime="{{ created_at }}"></time>
