@@ -25,6 +25,18 @@ export default class TwitterClient {
     });
   }
 
+  getFavorites() {
+    return new Promise((resolve, reject) => {
+      this.client.get(
+        'favorites/list',
+        { count: 50 },
+        (error, tweets, response) => {
+          resolve(tweets);
+        }
+      )
+    });
+  }
+
   postTweet(text) {
     return new Promise((resolve, reject) => {
       this.client.post(

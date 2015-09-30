@@ -1,6 +1,7 @@
 import HomeTweets from './home_tweets'
 import ListTweets from './list_tweets'
 import MentionTweets from './mention_tweets'
+import FavoriteTweets from './favorite_tweets'
 
 class Timeline {
   constructor() {
@@ -63,6 +64,19 @@ class Timeline {
     this.currentWindowName = "MENTIONS";
     this.switchTimeline(id);
   }
+
+  showFavorites() {
+    let id = "favorites";
+
+    if (!this.windows[id]) {
+      let el = this.createElement(id);
+      this.windows[id] = new FavoriteTweets(el);
+    }
+
+    this.currentWindowName = "FAVORITES";
+    this.switchTimeline(id);
+  }
+
 
   currentWindow() {
     return this.windows[this.currentWindowId];

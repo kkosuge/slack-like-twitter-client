@@ -31,12 +31,18 @@ export default class Lists extends React.Component {
     Timeline.showMentions();
   }
 
+  showFavorites() {
+    Timeline.showFavorites();
+  }
+
   render() {
     let currentWindowId = Timeline.currentWindowId;
-    let homeClassName, mentionsClassName;
+    let homeClassName, mentionsClassName, favoritesClassName;
     let homeIsActive = currentWindowId === 'hometimeline';
     let mentionsIsActive = currentWindowId === 'mentions';
     let mentionsIsEnabled = !!this.state.windows['mentions'];
+    let favoritesIsActive = currentWindowId === 'favorites';
+    let favoritesIsEnabled = !!this.state.windows['favorites'];
 
     if (homeIsActive) {
       homeClassName = 'active';
@@ -48,6 +54,12 @@ export default class Lists extends React.Component {
       mentionsClassName = 'active';
     } else if (mentionsIsEnabled) {
       mentionsClassName = 'enabled';
+    }
+
+    if (favoritesIsActive) {
+      favoritesClassName = 'active';
+    } else if (favoritesIsEnabled) {
+      favoritesClassName = 'enabled';
     }
 
     let lists = this.state.lists.map((list) => {
@@ -84,6 +96,9 @@ export default class Lists extends React.Component {
             </li>
             <li className={ mentionsClassName } onClick={ this.showMentions }>
               <i className="fa fa-at"></i> MENTIONS
+            </li>
+            <li className={ favoritesClassName } onClick={ this.showFavorites }>
+              <i className="fa fa-star"></i> FAVORITES
             </li>
             { lists }
           </ul>
