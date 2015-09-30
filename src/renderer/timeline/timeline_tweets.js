@@ -80,7 +80,7 @@ export default class TimelineTweets {
       statusUrl: `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
     });
 
-    //el.querySelector('.js-add-favorite').addEventListener('click', this.toggleFavorite.bind(this))
+    el.querySelector('.js-add-favorite').addEventListener('click', this.toggleFavorite.bind(this))
 
     let tweets = document.getElementById('tweets');
     let prevScrollMinusTop = tweets.scrollHeight - tweets.scrollTop;
