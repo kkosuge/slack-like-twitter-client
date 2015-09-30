@@ -1,5 +1,5 @@
 import TimelineTweets from './timeline_tweets'
-import TwitterClient from '../twitter_client/twitter_client'
+import TwitterClient from '../twitter_client'
 
 export default class MentionTweets extends TimelineTweets {
   constructor(node) {

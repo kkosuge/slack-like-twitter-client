@@ -13,6 +13,30 @@ export default class TwitterClient {
    return this.client;
   }
 
+  getHomeTimeline() {
+    return new Promise((resolve, reject) => {
+      this.client.get(
+        'statuses/home_timeline',
+        { count: 50 },
+        (error, tweets, response) => {
+          resolve(tweets);
+        }
+      )
+    });
+  }
+
+  getListTimeline(params) {
+    return new Promise((resolve, reject) => {
+      this.client.get(
+        'lists/statuses',
+        { list_id: params.listId },
+        (error, tweets, response) => {
+          resolve(tweets)
+        }
+      )
+    });
+  }
+
   getMentions() {
     return new Promise((resolve, reject) => {
       this.client.get(

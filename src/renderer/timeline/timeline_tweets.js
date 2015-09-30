@@ -1,6 +1,6 @@
 import Tweet from '../model/tweet'
 window.Tweet = Tweet;
-import TwitterClient from '../twitter_client/twitter_client'
+import TwitterClient from '../twitter_client'
 
 export default class TimelineTweets {
   constructor(node) {

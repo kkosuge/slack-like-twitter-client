@@ -1,5 +1,5 @@
 import TimelineTweets from './timeline_tweets'
-import HomeTimelineClient from '../twitter_client/home_timeline_client'
+import HomeTimelineClient from '../twitter_client'
 
 export default class HomeTweets extends TimelineTweets {
   constructor(node) {
@@ -11,7 +11,7 @@ export default class HomeTweets extends TimelineTweets {
 
   update() {
     (async () => {
-       let tweets = await this.client.get();
+       let tweets = await this.client.getHomeTimeline();
        info("HomeTweets#update")
        tweets.reverse().forEach((tweet) => {
          this.pushTweet(tweet);
